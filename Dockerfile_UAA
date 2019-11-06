@@ -1,0 +1,15 @@
+FROM centos:7
+
+RUN yum update -y && \
+yum install -y java-1.8.0-openjdk java-1.8.0-openjdk-devel && \
+yum clean all
+
+#copy files
+COPY uaa /tmp/uaa
+COPY uaa_config.yml /tmp/uaa/uaa_config.yml
+COPY scripts/services-init-ec2-uaa.sh /tmp/
+
+#run it
+RUN chmod +x /tmp/services-init-ec2-uaa.sh
+ENTRYPOINT "/tmp/services-init-ec2-uaa.sh" && /bin/bash
+EXPOSE 8080

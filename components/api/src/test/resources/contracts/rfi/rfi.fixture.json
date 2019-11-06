@@ -1,0 +1,12 @@
+{
+  "id": 1,
+  "title": "War Sometimes Changes",
+  "country": "US",
+  "links": [{
+    "parentObjectId": "test",
+    "linkedObjectId": "test",
+    "originatingSystem": "test",
+    "title": "test",
+    "status": "test"
+  }]
+}

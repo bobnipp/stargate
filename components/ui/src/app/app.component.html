@@ -1,0 +1,21 @@
+<div class="main-app">
+    <div class="side-nav">
+        <side-navigation></side-navigation>
+    </div>
+    <div class="container">
+        <div class="navigation">
+            <navigation></navigation>
+        </div>
+        <div class="filter-bar">
+            <stargate-filter-bar></stargate-filter-bar>
+        </div>
+        <div class="content">
+            <content></content>
+        </div>
+    </div>
+</div>
+
+<!-- fixed position components -->
+<stargate-confirm-modal></stargate-confirm-modal>
+<stargate-sidebar [@slideInOut] *ngIf="currentRecord" [record]="currentRecord" #recordDetails></stargate-sidebar>
+<stargate-toast></stargate-toast>

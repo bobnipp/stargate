@@ -1,0 +1,49 @@
+spring_profiles: default,mysql
+jwt:
+  token:
+    signing-key: |
+      -----BEGIN RSA PRIVATE KEY-----
+      MIIEpQIBAAKCAQEAxTcuVfC7IXHpAbalvQl44b0NO3Pa00XRqdfEg8bGdrGMC1oq
+      Ai9bGO8GijknkK8MTAlDuZ1PSmvp0U+mPvl1r41Bp3bu6Wt3pOoww9UTBYJUtW5S
+      CkcegOwNYLfuDXu8Rx1AgLS1bNxAVBXQ3obrlcYAU5h1wiIu2Qi4YGH3egxynM5u
+      xzYg7qDXQGDuMSCWf3Ceagrl6nukncFHY0ZgIAgOj9tNW8WY05S7vBHv8aaso0SG
+      eTVsJ7gfwZxvIQwJb4m8oJ9tHwHeNuULPrFc2t+47uZL/38U+HD5KuxrR3iobzBe
+      li2hBc0gqigGfTspENwWu2oHa8DP+hq9rVxn5QIDAQABAoIBAQCpDuiVm0uPHArW
+      ATCKoDgTqvBQ6rvHKK7WnbREEn3G+eRHRv+D5/x7n0tH6j7UdHpiI/7+eq+h6GgD
+      mfe1PDt6RejmGbosNofVwzwSY/FuY48iCHQjg1vOwIunQYS74jo/6/+DVWXA7/3l
+      Ft56I8aIGbfl8WfhB1SJkEQdu11eLRFkrarNaPMFoz7xLTh7VBzTFwHetpo+EZ4i
+      +xj4y5j6VGn9Ca9EaXQvKYFV9UVflFWoDmX/rjIICa6qaiPko+Es4e8SWytefIxl
+      oYfAWNc5fokbQtAiW+d1UmYd6sZ9gBZbdPAxvnc7zMtVCx8QGO2b3wFm38WCFrBd
+      jiiiYPqBAoGBAP3vRE0seni+WS4T+leQcDbMl1NNoYDDYAqbenbxAQBdqMu9dGee
+      PBf/HPc65jC+MUivd6Gib5aBOrHl6gGh6QoIdcfHdRt/JS5Kdx2XVzEnHlXks5XC
+      pMuEByWnFP6gNOdVbgXtockt4xdsr0kY/EiLad3keUrjEuoiKhpXZiTZAoGBAMbR
+      0NrZ1iOXug04YA42n2KsXFeSDCQK2z2c5EdS/ZsUbJ68E0ByfiUgYEnt+ZbASrJm
+      bjZ8rNsJEEXUuwU5i+xHZzyEG3leyqW+LavhtnmOzQ8BLRBwPBqIU8F3/WPB3VGI
+      0fyeDbT7mlCJSQn3oVULLQIA/CnCtqwP+haCs8PtAoGAQUvJMF8DjxDDNcoFUYbe
+      k/i/4LfRk56pj5CzSOpn64Qp51nsGMjjgvgipqAKmPYPDjWweWufbgAE68HHDmxn
+      1CCgyKJNRqjHEsQrJPzJeuYoMsYAN745SevFOrVf/KmNcP7Sr8uPEoAuKNPVruIx
+      3SWcL2aUmeER+AqY8PUQWuECgYEAqEa7vA/108g+u6PEgSMwQcbanW/KgNMDfyGE
+      gO24IoLl8HAE515AcFH3zXry7eoxDs/tZoadkwIX2NLVu/VZ/ZDtyuWRj2dwo1nU
+      tA7lb/syigmXx7sG0/og0bYqLD3QgYsJGAP6W/08PgAEZsBFt4IvBOwqgXoBPJ6F
+      MHpNhn0CgYEA5RmSKkG2lCtn2zSq/N932S3CyANiHyH+6ljpW6SzqGfIIIv9Xu7N
+      GjsYCj2XdJWSbZkBUOO+QCiVzwDMdKXP/ssb9yG2/X8iiloBhOYcQ/K8pM5Sa3a9
+      eMtFEcS3RwvAoZRL/EbJyRR+xXoZGeO7gMdHpuYb4+Y3lujMaqHsFAw=
+      -----END RSA PRIVATE KEY-----
+    verification-key: |
+      -----BEGIN PUBLIC KEY-----
+      MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxTcuVfC7IXHpAbalvQl4
+      4b0NO3Pa00XRqdfEg8bGdrGMC1oqAi9bGO8GijknkK8MTAlDuZ1PSmvp0U+mPvl1
+      r41Bp3bu6Wt3pOoww9UTBYJUtW5SCkcegOwNYLfuDXu8Rx1AgLS1bNxAVBXQ3obr
+      lcYAU5h1wiIu2Qi4YGH3egxynM5uxzYg7qDXQGDuMSCWf3Ceagrl6nukncFHY0Zg
+      IAgOj9tNW8WY05S7vBHv8aaso0SGeTVsJ7gfwZxvIQwJb4m8oJ9tHwHeNuULPrFc
+      2t+47uZL/38U+HD5KuxrR3iobzBeli2hBc0gqigGfTspENwWu2oHa8DP+hq9rVxn
+      5QIDAQAB
+      -----END PUBLIC KEY-----
+
+database:
+  url: ${UAA_JDBC_URL}
+  username: ${UAA_DB_USERNAME}
+  password: ${UAA_DB_PASSWORD}
+  maxactive: 4
+  maxidle: 4
+  minidle: 1

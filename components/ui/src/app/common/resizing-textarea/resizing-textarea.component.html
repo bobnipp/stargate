@@ -1,0 +1,5 @@
+<form [formGroup]="formGroup" class="resizing">
+    <textarea [id]="textAreaId" [formControlName]="textAreaControlName"
+              [placeholder]="textAreaPlaceholder" [className]="textAreaClass"
+              (input)="textAreaAdjust($event.currentTarget)"></textarea>
+</form>

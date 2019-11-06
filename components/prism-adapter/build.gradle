@@ -1,0 +1,64 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+    }
+}
+
+plugins {
+    id 'com.adarshr.test-logger' version '1.3.0'
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'groovy'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+
+group = 'com.afresearchlab'
+version = '0.0.1-SNAPSHOT'
+archivesBaseName = 'prism-adapter'
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        credentials {
+            username "$System.env.NEXUS_USERNAME"
+            password "$System.env.NEXUS_PASSWORD"
+        }
+        url "https://nexus.di2e.net/nexus/content/groups/public"
+    }
+}
+
+dependencies {
+    compile project(':components:prism-client')
+    compile project(':components:prism-adapter-models')
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    compile("io.springfox:springfox-swagger2:$swaggerVersion")
+    compile("io.springfox:springfox-swagger-ui:$swaggerVersion")
+    compile("org.springframework.boot:spring-boot-starter-actuator:$springBootVersion")
+    compile('org.cometd.java:cometd-java-client:3.1.4')
+    compile('com.google.code.gson:gson:2.8.5')
+    compile('javax.inject:javax.inject:1')
+    compile('redis.clients:jedis:2.8.0')
+    compileOnly('org.projectlombok:lombok:1.16.20')
+    testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testCompile("org.spockframework:spock-core:$spockVersion")
+    testCompile("org.spockframework:spock-spring:$spockVersion")
+    testCompile('io.rest-assured:spring-mock-mvc:3.1.0')
+    testCompile('com.github.tomakehurst:wiremock:2.18.0')
+    testCompile('io.rest-assured:json-schema-validator:3.0.0')
+    testCompile('com.github.fge:json-schema-validator:2.2.6')
+    testCompile('com.github.fge:json-schema-core:1.2.5')
+}
+
+defaultTasks 'clean', 'test', 'assemble'
+
+task downloadDependencies(type: Exec, dependsOn: 'compileJava') {
+    configurations.testRuntime.files
+    commandLine 'echo', 'Downloaded all dependencies'
+}

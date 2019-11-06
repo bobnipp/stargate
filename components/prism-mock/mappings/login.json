@@ -1,0 +1,14 @@
+{
+  "id": "302e52d6-8b67-41af-a012-357343f1ee1d",
+  "request": {
+    "method": "POST",
+    "urlPattern": "/prism-webapp/j_spring_security_check\\?j_username=(.*)&j_password=(.*)&j_database=PR7AWS"
+  },
+  "response": {
+    "status": 302,
+    "headers": {
+      "Set-Cookie": "cookie1;cookie2",
+      "Content-Type": "application/json"
+    }
+  }
+}

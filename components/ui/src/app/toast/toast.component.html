@@ -1,0 +1,5 @@
+<div class="toast" [ngClass]="{success: type === 'success', info: type === 'info', error: type === 'error'}" [@animateState]="toastState">
+    <div class="toast-content">
+        {{ message }}
+    </div>
+</div>

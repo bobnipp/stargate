@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="31px" viewBox="0 0 20 31" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>EDA6CE53-8193-4650-AFAA-A7F8F71A4073</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <ellipse id="path-1" cx="7.2" cy="24" rx="4" ry="2"></ellipse>
+        <filter x="-18.8%" y="-37.5%" width="137.5%" height="175.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="IMM---July" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Styleguide---Map" transform="translate(-230.000000, -191.000000)">
+            <g id="pinRequestHover" transform="translate(232.000000, 193.000000)">
+                <g id="Group-10" transform="translate(1.000000, 1.000000)">
+                    <g id="Oval-3" fill="black" fill-opacity="1">
+                        <use filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    </g>
+                    <path d="M2.81260635,13.2230733 C0.760401334,11.8401499 -0.5,9.52737451 -0.5,7 C-0.5,2.85786438 2.85786438,-0.5 7,-0.5 C11.1421356,-0.5 14.5,2.85786438 14.5,7 C14.5,9.5484921 13.2183177,11.877877 11.1383889,13.2558323 L7.19303455,23.1362601 L2.81260635,13.2230733 Z" id="Combined-Shape" stroke="#FFFFFF" fill="#5B973E"></path>
+                    <circle id="Oval-2-Copy" fill="#335622" cx="7" cy="7" r="4"></circle>
+                </g>
+                <g id="Group-4-Copy-4" transform="translate(1.000000, 1.000000)">
+                    <g id="Requests-Copy-2"></g>
+                </g>
+                <rect id="Rectangle-15-Copy" stroke="#1AC0E5" stroke-width="2" x="-1" y="-1" width="18" height="29"></rect>
+            </g>
+        </g>
+    </g>
+</svg>

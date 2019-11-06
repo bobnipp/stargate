@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  api:
+    image: docker-di2e.di2e.net/stargate-api:0.0.4
+    ports:
+      - "8081:8081"
+    environment:
+      - UAA_HOST=${EC2_HOST}
+      - STARGATE_JDBC_URL=${STARGATE_JDBC_URL}
+      - STARGATE_DB_USERNAME=${STARGATE_DB_USERNAME}
+      - STARGATE_DB_PASSWORD=${STARGATE_DB_PASSWORD}
+      - PRISM_ADAPTER_HOST=prism-adapter
+  prism-adapter:
+    image: docker-di2e.di2e.net/stargate-prism-adapter:0.0.3
+    ports:
+      - "8082:8082"
+    environment:
+      - PRISM_CACHE_HOST=${PRISM_CACHE_HOST}
+      - PRISM_CACHE_PORT=${PRISM_CACHE_PORT}
+  uaa:
+    image: docker-di2e.di2e.net/stargate-aws-uaa:0.0.3
+    ports:
+      - "8080:8080"
+    environment:
+      - UAA_JDBC_URL=${UAA_JDBC_URL}
+      - UAA_DB_USERNAME=${UAA_DB_USERNAME}
+      - UAA_DB_PASSWORD=${UAA_DB_PASSWORD}

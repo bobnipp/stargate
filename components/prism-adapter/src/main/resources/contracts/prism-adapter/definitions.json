@@ -1,0 +1,50 @@
+{
+  "requirement": {
+    "type": "object",
+    "properties": {
+      "id": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "description": {
+        "type": "string"
+      },
+      "date": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      },
+      "lat": {
+        "anyOf": [
+          {
+            "type": "number",
+            "minimum": -90,
+            "maximum": 90
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "lng": {
+        "anyOf": [
+          {
+            "type": "number",
+            "minimum": -180,
+            "maximum": 180
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "required": [
+      "id",
+      "title"
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "id": "61be0938-09c0-4db5-9b20-d0139f989cb9",
+  "request": {
+    "method": "GET",
+    "url": "/prism-webapp/"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "text/html"
+    },
+    "bodyFileName": "prism.html"
+  }
+}

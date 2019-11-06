@@ -1,0 +1,71 @@
+<div [id]="record.id + ':' + record.recordType" class="list-table_item record-container"
+     draggable="true" (dragstart)="dragStart($event)" (dragend)="dragEnd($event)"
+     [ngClass]="{active: isActive}">
+    <div [id]="record.id" class="clickable record-child" [ngClass]="{active: isActive}"
+         (click)="openRecord(record)">
+        <div [ngClass]="{active: isActive}">
+            <div class="list-table_item_col" [ngClass]="{active: isActive}">
+                <div class="title" [ngClass]="{active: isActive}">
+                    {{record.title}}
+                </div>
+            </div>
+            <div class="list-table_item_col record-id" [ngClass]="{active: isActive}">
+                <stargate-copy-button [textToCopy]="record.id">
+                    <ng-container class="status">
+                        {{ idText }} ID
+                    </ng-container>
+                    #{{record.id}}
+                </stargate-copy-button>
+            </div>
+            <div class="list-table_item_col justification-coordinates"
+                 [ngClass]="{active: isActive}">
+                <div class="justification" [ngClass]="{active: isActive}" *ngIf="record.justification">
+                    {{ record.justification }}
+                </div>
+            </div>
+            <div class="list-table_item_col action-row">
+                <div class="badge" style="">{{record.status}}</div>
+                <button *ngIf="fireRevealLocation && showRevealLinks" class="open-link-list tooltip"
+                        [ngClass]="{'open-link-list_active': isActive}" data-tooltip="Reveal Location"
+                        (click)="fireRevealLocation(record.id); $event.stopPropagation()">
+                    <i class="reveal-location_icon material-icons">location_searching</i>
+                </button>
+                <button *ngIf="record.links.length > 0" class="open-link-list tooltip"
+                        [ngClass]="{'open-link-list_active': isLinkActive }" data-tooltip="Reveal Links"
+                        (click)="doOpenLinkList(record);$event.stopPropagation()">
+                    <span class="icon-revealLinks"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <ul class="list-table_item-actions">
+        <li id="{{record.id}}" class="list-table_item-action list-table_item-action--menu submenu"
+            [ngClass]="{active: showMoreMenu}" (click)="toggleMoreMenu()">
+            <div class="material-icons">more_vert</div>
+
+            <div class="more-wrapper">
+                <ul *ngIf="showMoreMenu">
+                    <li class="submenu add-to-list" [ngClass]="{active: showMoreMenu && showAddToListMenu}">
+                        <a (click)="toggleAddToListMenu(); $event.stopPropagation()">Add to List</a>
+                        <div class="material-icons right-menu">chevron_right</div>
+                    </li>
+                    <li *ngIf="removeFromList && list" class="submenu add-to-list remove-record">
+                        <a (click)="removeFromList(); $event.stopPropagation()">Remove</a>
+                    </li>
+                    <li *ngIf="record.recordType === rfiType" class="submenu add-to-list delete-record">
+                        <a (click)="deleteRecord(); $event.stopPropagation()">Delete</a>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="add-to-list-wrapper">
+                <ul *ngIf="showMoreMenu && showAddToListMenu">
+                    <li *ngFor="let list of lists">
+                        <a (click)="saveToList(list.name); $event.stopPropagation()">{{list.name}}</a>
+                    </li>
+                </ul>
+            </div>
+
+        </li>
+    </ul>
+</div>

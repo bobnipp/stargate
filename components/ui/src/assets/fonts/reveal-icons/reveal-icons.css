@@ -1,0 +1,41 @@
+@font-face {
+    font-family: 'Reveal Icons';
+    font-style: normal;
+    font-weight: 400;
+    src: url(icomoon.eot); /* For IE6-8 */
+    src: local('Reveal Icons'),
+    local('icomoon'),
+    url(icomoon.woff) format('woff'),
+    url(icomoon.ttf) format('truetype');
+}
+
+.reveal-icons {
+    font-family: 'Reveal Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px; /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+}
+
+.icon-revealLinks:before {
+    font-family: 'Reveal Icons';
+    font-size: 15px;
+    content: "\e900";
+}

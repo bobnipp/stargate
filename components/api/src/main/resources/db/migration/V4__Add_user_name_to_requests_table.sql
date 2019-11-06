@@ -1,0 +1,2 @@
+ALTER TABLE requests
+ADD COLUMN user_name VARCHAR(100) NOT NULL

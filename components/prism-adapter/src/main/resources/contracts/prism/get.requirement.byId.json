@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "oneOf": [
+    {
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "key": {
+              "type": "string"
+            },
+            "name": {
+              "type": "string"
+            },
+            "description": {
+              "type": "string"
+            },
+            "dateCreatedOn": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "key",
+            "name",
+            "description"
+          ]
+        },
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data", "success"
+      ]
+    },
+    {
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "msg", "success"
+      ]
+    }
+  ]
+}

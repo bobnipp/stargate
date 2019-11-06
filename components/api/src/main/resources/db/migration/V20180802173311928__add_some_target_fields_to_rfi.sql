@@ -1,0 +1,5 @@
+ALTER TABLE imm_rfis
+    ADD COLUMN city VARCHAR(100),
+    ADD COLUMN mgrs VARCHAR(100),
+    ADD COLUMN province VARCHAR(100),
+    ADD COLUMN nai VARCHAR(100)

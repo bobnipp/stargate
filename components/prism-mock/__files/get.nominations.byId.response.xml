@@ -1,0 +1,134 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:getNOMResponse xmlns:ns2="http://PRISMCoreDataWS.coredataws.ws.prism.saic.com">
+            <return>
+                <success>true</success>
+                <prismNomList>
+                    <key>000000000000001PR7AWS</key>
+                    <id>ACC 01 EO-IR-SAR RECON 1:2 20160921</id>
+                    <prismId>UNKNOWN16NOM-000000000000001PR7AWS</prismId>
+                    <name>ACC 01 EO-IR-SAR RECON 1:2 20160921</name>
+                    <precedence>IMMEDIATE</precedence>
+                    <justification>NOM Justification</justification>
+                    <comments>=== Comment By: DLARSEN (Derek Larsen) On: 2017-09-25 13:38:43 ===
+NOM Comments/Special Instructions
+
+=== Comment By: DLARSEN (Derek Larsen) On: 2017-09-25 13:55:12 ===
+NOM Comments/Special Instructions
+                    </comments>
+                    <nomImint>
+                        <respOrg>ACC TEST</respOrg>
+                        <status>APPROVE</status>
+                        <crList>
+                            <key>1</key>
+                            <id>CENTCOM18CR-1</id>
+                            <prismId>CENTCOM18CR-1</prismId>
+                            <name>TESTING STUFF FOR FUN</name>
+                            <dataInfo>
+                                <owner>PRISM</owner>
+                                <createdBy>RANDREWS (randrews)</createdBy>
+                                <createdOn>2018-10-19T11:15:07.000Z</createdOn>
+                                <lastModifiedBy>RANDREWS (randrews)</lastModifiedBy>
+                                <lastModifiedOn>2018-10-19T11:15:34.000Z</lastModifiedOn>
+                                <prismStatus>N</prismStatus>
+                                <prismState>ACTIVE</prismState>
+                            </dataInfo>
+                        </crList>
+                        <targetList>
+                            <key>000000000000907PR7AWS</key>
+                            <id>PDSDFAASDFSADF</id>
+                            <prismId>PDSDFAASDFSADF:PRISM</prismId>
+                            <name>SDFAASDFSADFA</name>
+                            <dataInfo>
+                                <owner>PRISM</owner>
+                                <createdBy>RANDREWS (randrews)</createdBy>
+                                <createdOn>2018-10-19T11:15:34.000Z</createdOn>
+                                <lastModifiedBy>RANDREWS (randrews)</lastModifiedBy>
+                                <lastModifiedOn>2018-10-19T11:15:34.000Z</lastModifiedOn>
+                                <prismStatus>N</prismStatus>
+                            </dataInfo>
+                            <type>DSA</type>
+                        </targetList>
+                        <dataInfo>
+                            <owner>PRISM</owner>
+                            <createdBy>RANDREWS (randrews)</createdBy>
+                            <createdOn>2018-10-19T11:14:43.000Z</createdOn>
+                            <lastModifiedBy>RANDREWS (randrews)</lastModifiedBy>
+                            <lastModifiedOn>2018-10-19T11:15:34.000Z</lastModifiedOn>
+                            <prismStatus>N</prismStatus>
+                        </dataInfo>
+                    </nomImint>
+                    <dataInfo>
+                        <owner>PRISM</owner>
+                        <createdBy>RANDREWS (randrews)</createdBy>
+                        <createdOn>2017-10-19T11:14:43.000Z</createdOn>
+                        <lastModifiedBy>RANDREWS (randrews)</lastModifiedBy>
+                        <lastModifiedOn>2017-10-19T11:15:34.000Z</lastModifiedOn>
+                        <prismStatus>A</prismStatus>
+                        <prismState>ACTIVE</prismState>
+                    </dataInfo>
+                </prismNomList>
+                <prismNomList>
+                    <key>110000000000001PR8AWS</key>
+                    <id>THIS IS LAST IN THE LIST RETURNED FROM PRISM BUT CREATED MOST RECENTLY</id>
+                    <prismId>UNKNOWN16NOM-110000000000001PR8AWS</prismId>
+                    <name>THIS IS LAST IN THE LIST RETURNED FROM PRISM BUT CREATED MOST RECENTLY</name>
+                    <precedence>ROUTINE</precedence>
+                    <justification>Another justification</justification>
+                    <comments>Random comments supporting research</comments>
+                    <nomImint>
+                        <respOrg>ACC TEST</respOrg>
+                        <status>SUBMITTED</status>
+                        <crList>
+                            <key>2</key>
+                            <id>CENTCOM18CR-2</id>
+                            <prismId>CENTCOM18CR-2</prismId>
+                            <name>TESTING STUFF FOR MORE FUN</name>
+                            <dataInfo>
+                                <owner>PRISM</owner>
+                                <createdBy>JGUSTINE (jgustine)</createdBy>
+                                <createdOn>2018-10-20T11:15:07.000Z</createdOn>
+                                <lastModifiedBy>JGUSTINE (jgustine)</lastModifiedBy>
+                                <lastModifiedOn>2018-10-20T11:15:34.000Z</lastModifiedOn>
+                                <prismStatus>N</prismStatus>
+                                <prismState>ACTIVE</prismState>
+                            </dataInfo>
+                        </crList>
+                        <targetList>
+                            <key>000000000000907PR7AWS</key>
+                            <id>PDSDFAASDFSADF</id>
+                            <prismId>PDSDFAASDFSADF:PRISM</prismId>
+                            <name>SDFAASDFSADFA</name>
+                            <dataInfo>
+                                <owner>PRISM</owner>
+                                <createdBy>RANDREWS (randrews)</createdBy>
+                                <createdOn>2018-10-19T11:15:34.000Z</createdOn>
+                                <lastModifiedBy>RANDREWS (randrews)</lastModifiedBy>
+                                <lastModifiedOn>2018-10-19T11:15:34.000Z</lastModifiedOn>
+                                <prismStatus>N</prismStatus>
+                            </dataInfo>
+                            <type>DSA</type>
+                        </targetList>
+                        <dataInfo>
+                            <owner>PRISM</owner>
+                            <createdBy>RANDREWS (randrews)</createdBy>
+                            <createdOn>2018-10-19T11:14:43.000Z</createdOn>
+                            <lastModifiedBy>RANDREWS (randrews)</lastModifiedBy>
+                            <lastModifiedOn>2018-10-19T11:15:34.000Z</lastModifiedOn>
+                            <prismStatus>N</prismStatus>
+                        </dataInfo>
+                    </nomImint>
+                    <dataInfo>
+                        <owner>PRISM</owner>
+                        <createdBy>RANDREWS (randrews)</createdBy>
+                        <createdOn>2018-01-01T11:14:43.000Z</createdOn>
+                        <lastModifiedBy>RANDREWS (randrews)</lastModifiedBy>
+                        <lastModifiedOn>2018-01-01T11:15:34.000Z</lastModifiedOn>
+                        <prismStatus>A</prismStatus>
+                        <prismState>ACTIVE</prismState>
+                    </dataInfo>
+                </prismNomList>
+            </return>
+        </ns2:getNOMResponse>
+    </soap:Body>
+</soap:Envelope>

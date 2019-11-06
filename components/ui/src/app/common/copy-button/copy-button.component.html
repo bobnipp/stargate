@@ -1,0 +1,13 @@
+<div class="copy-button">
+    <svg (click)="copyText(); $event.stopPropagation()" class="icon icon--copy" xmlns="http://www.w3.org/2000/svg"
+         width="16" height="16" viewBox="0 0 16 16">
+        <path fill="#3681A8" fill-rule="nonzero"
+              d="M10.667 3.2H9V1.667H1.667V9H3.2v1.667H0V0h10.667v3.2zM5.333 5.333H16V16H5.333V5.333zm1.667 9h7.333V7H7v7.333z"/>
+    </svg>
+
+    <span class="tooltip" [ngClass]="{active: isCopied}">
+        ID Copied
+    </span>
+
+    <ng-content></ng-content>
+</div>

@@ -1,0 +1,71 @@
+<stargate-add-list *ngIf="showAddList" (close)="handleAddListClose($event)"></stargate-add-list>
+<div class="column-container">
+    <div class="lists-bar" data-aid="lists-bar">
+        <div class="arrow-icon-container"
+             [ngClass]="{'arrow-icon-container_open': listsBarOpen, 'arrow-icon-container_closed': !listsBarOpen }">
+            <i class="material-icons arrow-icon" *ngIf="listsBarOpen" (click)="toggleListBar()">arrow_back</i>
+            <i class="material-icons arrow-icon_closed" *ngIf="!listsBarOpen"
+               (click)="toggleListBar()">arrow_forward</i>
+            <span class="add-list-container" (click)="showAddList = true">
+                <button class="add-list create arrow-icon_add-button" *ngIf="!listsBarOpen">
+                    <i class="material-icons">add</i>
+                </button>
+            </span>
+        </div>
+        <ng-container *ngIf="listsBarOpen">
+            <div class="list-header">COMPONENT LISTS</div>
+            <div class="list-bar-section lists-bar-header">
+                <div class="list-bar_title-container">
+                    <div class="list-title" (click)="toggleList(rfiRecordType)" [ngClass]="{active: showRFIList}">IMM RFIs</div>
+                </div>
+                <div class="list-bar_title-container">
+                    <div class="list-title" (click)="toggleList(nomRecordType)" [ngClass]="{active: showNOMList}">PRISM NOMs</div>
+                </div>
+            </div>
+            <div class="list-header">CUSTOM LISTS</div>
+            <div class="list-bar-section lists-bar-myLists">
+                <div class="list-bar_title-container" *ngFor="let list of lists">
+                    <div class="list-title" (click)="toggleCustomList(list.name)"
+                         [ngClass]="{active: isCustomListActive(list.name)}">{{list.name}}
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="list-bar-section lists-bar-footer">
+                <span class="add-list-container" (click)="showAddList = true">
+                    <button class="add-list create"><i class="material-icons">add</i></button>
+                    <span class="add-title">Add a List</span>
+                </span>
+            </div>
+        </ng-container>
+    </div>
+
+    <div id="lists-container" class="record-container"
+         [ngClass]="
+            {
+                'record-container_remove-width-for-sidebar': !!activeRecord && listsBarOpen,
+                'record-container_remove-width-for-sidebar_lists-bar-closed': !!activeRecord && !listsBarOpen
+            }">
+        <div class="list-container">
+
+            <stargate-system-list class="list-container-flex" [hidden]="!showRFIList" [listType]="rfiRecordType"
+                                  [linkRecords]="linkRecords" (closeList)="toggleList($event)"
+                                  (refreshList)="refreshList($event)">
+            </stargate-system-list>
+            <stargate-system-list class="list-container-flex" [hidden]="!showNOMList" [listType]="nomRecordType"
+                                  [linkRecords]="linkRecords" (closeList)="toggleList($event)"
+                                  (refreshList)="refreshList($event)">
+            </stargate-system-list>
+            <stargate-links-list #linksList class="list-container-flex" *ngFor="let anchorRecord of linkRecords"
+                                 [anchorRecord]="anchorRecord"
+                                 [rfis]="rfis" [noms]="nominations" (fireCloseList)="closeLinkList($event)">
+            </stargate-links-list>
+
+            <stargate-custom-list #customList class="list-container-flex" *ngFor="let list of showLists" [list]="list"
+                                  [rfis]="rfis"
+                                  [noms]="nominations" (fireDeleteList)="deleteList($event)"
+                                  (fireCloseList)="closeCustomList($event)">
+            </stargate-custom-list>
+        </div>
+    </div>
+</div>

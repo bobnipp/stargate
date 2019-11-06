@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "35399436-bfc4-42ef-9b70-e75743bf5848",
+		"name": "Prism Mock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Admin Functions",
+			"description": "",
+			"item": [
+				{
+					"name": "List requests",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{wiremock-host}}/__admin/mappings",
+							"host": [
+								"{{wiremock-host}}"
+							],
+							"path": [
+								"__admin",
+								"mappings"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change GET ALL request response",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{ \n  \"request\": {\n    \"method\": \"GET\", \n    \"url\": \"/requirements\"\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"Content-Type\": \"application/json\"\n    },\n    \"jsonBody\": [\n      {\n            \"PRISM_ID\": \"123abc45\",\n            \"PRISM_TITLE\": \"Testing return\",\n            \"PRISM_DESCRIPTION\": \"Great new version, best ever\",\n            \"PRISM_DATE\": \"2018-04-04\",\n            \"PRISM_LAT\": 45.343,\n            \"PRISM_LNG\": 91.345\n      },\n      {\n            \"PRISM_ID\": \"123abc\",\n            \"PRISM_TITLE\": \"Testing return\",\n            \"PRISM_DESCRIPTION\": \"Great new version, best ever\",\n            \"PRISM_DATE\": \"2018-04-04\",\n            \"PRISM_LAT\": 45.343,\n            \"PRISM_LNG\": 91.345\n      }\n    ]\n  }\n}"
+						},
+						"url": {
+							"raw": "{{wiremock-host}}/__admin/mappings/03ff614d-e9b0-4c30-bfd9-57be97a73dc5",
+							"host": [
+								"{{wiremock-host}}"
+							],
+							"path": [
+								"__admin",
+								"mappings",
+								"03ff614d-e9b0-4c30-bfd9-57be97a73dc5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Change GET BY ID request response",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": \"03ff614d-e9b0-4c30-bfd9-57be97a73dc5\",\n  \"request\": {\n    \"method\": \"GET\",\n    \"url\": \"/requirements/123abc\"\n  },\n  \"response\": {\n    \"status\": 200,\n    \"headers\": {\n      \"Content-Type\": \"application/json\"\n    },\n    \"jsonBody\":\n      {\n            \"PRISM_ID\": \"123abc45\",\n            \"PRISM_TITLE\": \"Testing return\",\n            \"PRISM_DESCRIPTION\": \"Great new version, best ever\",\n            \"PRISM_DATE\": \"2018-04-04\",\n            \"PRISM_LAT\": 45.343,\n            \"PRISM_LNG\": 91.345\n      }\n  }\n}"
+						},
+						"url": {
+							"raw": "{{wiremock-host}}/__admin/mappings/03ff614d-e9b0-4c30-bfd9-57be97a73dc5",
+							"host": [
+								"{{wiremock-host}}"
+							],
+							"path": [
+								"__admin",
+								"mappings",
+								"03ff614d-e9b0-4c30-bfd9-57be97a73dc5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Revert all requests",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {},
+						"url": {
+							"raw": "{{wiremock-host}}/__admin/mappings/reset",
+							"host": [
+								"{{wiremock-host}}"
+							],
+							"path": [
+								"__admin",
+								"mappings",
+								"reset"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "List Requirements",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{wiremock-host}}/requirements",
+					"host": [
+						"{{wiremock-host}}"
+					],
+					"path": [
+						"requirements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find requirement by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{wiremock-host}}/requirements/123abc",
+					"host": [
+						"{{wiremock-host}}"
+					],
+					"path": [
+						"requirements",
+						"123abc"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

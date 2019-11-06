@@ -1,0 +1,112 @@
+buildscript {
+    ext {
+        springVersion = '5.0.6.RELEASE'
+        functionalJavaVersion = '4.7'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+    }
+}
+
+plugins {
+    id 'org.flywaydb.flyway' version '5.1.1'
+    id 'com.adarshr.test-logger' version '1.3.0'
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'groovy'
+
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group = 'com.afresearchlab'
+version = '0.0.1-SNAPSHOT'
+archivesBaseName = 'stargate'
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        credentials {
+            username "$System.env.NEXUS_USERNAME"
+            password "$System.env.NEXUS_PASSWORD"
+        }
+        url "https://nexus.di2e.net/nexus/content/groups/public"
+    }
+    maven { url 'https://maven.atlassian.com/content/repositories/atlassian-public/' }
+}
+
+dependencies {
+    compile project(':components:prism-client')
+    compile project(':components:prism-adapter-models')
+    compile("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:2.0.1.RELEASE")
+    compile("org.springframework.boot:spring-boot-starter-web:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-actuator:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-security:$springBootVersion")
+    compile("org.springframework.boot:spring-boot-starter-jdbc:$springBootVersion")
+    compile('org.springframework.cloud:spring-cloud-starter-netflix-hystrix:2.0.2.RELEASE')
+    compile('org.flywaydb:flyway-core:5.0.7')
+    compile("org.springframework.security:spring-security-oauth2-client:$springVersion")
+    compile("org.springframework.security:spring-security-oauth2-jose:$springVersion")
+    compile("org.springframework.integration:spring-integration-mail:$springVersion")
+    compile('mysql:mysql-connector-java:6.0.6')
+    compile('org.springframework.cloud:spring-cloud-spring-service-connector:2.0.2.RELEASE')
+    compile('org.springframework.cloud:spring-cloud-cloudfoundry-connector:2.0.2.RELEASE')
+    compile('com.sendgrid:sendgrid-java:4.2.1')
+    compile("io.springfox:springfox-swagger2:$swaggerVersion")
+    compile("io.springfox:springfox-swagger-ui:$swaggerVersion")
+
+    compile("org.functionaljava:functionaljava:$functionalJavaVersion")
+    compile("org.functionaljava:functionaljava-java8:$functionalJavaVersion")
+    compile("org.functionaljava:functionaljava-quickcheck:$functionalJavaVersion")
+    compile("org.functionaljava:functionaljava-java-core:$functionalJavaVersion")
+
+    compile('com.atlassian.jira:jira-rest-java-client-core:5.0.4')
+    compile('com.atlassian.fugue:fugue:2.6.1')
+
+    compile('com.google.code.gson:gson:2.8.5')
+    compile('com.amazonaws:aws-java-sdk-s3:1.11.519')
+
+    compileOnly('org.projectlombok:lombok:1.16.20')
+    testCompile("org.springframework.boot:spring-boot-starter-test:$springBootVersion")
+    testCompile('org.codehaus.groovy:groovy-all:2.4.13')
+    testCompile("org.spockframework:spock-core:$spockVersion")
+    testCompile("org.spockframework:spock-spring:$spockVersion")
+    testCompile('io.rest-assured:spring-mock-mvc:3.1.0')
+    testCompile('com.github.fge:json-schema-validator:2.2.6')
+    testCompile('com.github.fge:json-schema-core:1.2.5')
+}
+
+bootRun {
+    sourceResources sourceSets.main
+}
+
+flyway {
+    url = 'jdbc:mysql://localhost/stargate?serverTimezone=UTC&verifyServerCertificate=false&useSSL=true'
+    user = 'root'
+}
+
+import java.time.ZoneOffset
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
+
+task generateMigration {
+    doLast {
+        if (!project.hasProperty('migrationName')) {
+            throw new GradleException("****** You need to specify a name: ./gradlew components:api:generateMigration -PmigrationName=foo_bar_baz *****")
+        }
+
+        def migrationId = DateTimeFormatter.ofPattern('yyyyMMddkkmmssSSS').format(ZonedDateTime.now(ZoneOffset.UTC))
+        def projectDir = buildscript.sourceFile.parentFile.absoluteFile
+        new File("${projectDir}/src/main/resources/db/migration/V${migrationId}__${migrationName}.sql").write('')
+    }
+}
+
+task downloadDependencies(type: Exec, dependsOn: 'compileJava') {
+    configurations.testRuntime.files
+    commandLine 'echo', 'Downloaded all dependencies'
+}

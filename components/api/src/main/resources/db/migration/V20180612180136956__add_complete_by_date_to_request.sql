@@ -1,0 +1,2 @@
+ALTER TABLE rfis
+ADD COLUMN complete_by_date TIMESTAMP NULL

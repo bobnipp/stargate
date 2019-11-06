@@ -1,0 +1,37 @@
+<div class="popover" *ngIf="showPopoverMid || showPopoverRight"
+     (clickOutside)="closePopover()" [exclude]="icon" [delayClickOutsideInit]=true>
+    Acceptable Formats:<br><br>
+    <div *ngIf="showPopoverMid">
+        <strong>Decimal Degrees</strong>
+        <ul>
+            <li>up to 7 digits after the decimal</li>
+            <li>example with plus/minus: DD.DDDDDDD -DDD.DDDDDDD</li>
+            <li>example with direction: DD.DDDDDDDX DDD.DDDDDDDX</li>
+        </ul>
+        <strong>Degrees minutes seconds</strong>
+        <ul>
+            <li>D=Degrees, M=Minutes, S=Seconds, X=Direction</li>
+            <li>example: DDMMSSX DDDMMSSX</li>
+        </ul>
+        <div class="popover__arrow"
+             [ngClass]="{'popover__arrow--mid-position': showPopoverMid, 'popover__arrow--right-position': !showPopoverMid}">
+        </div>
+    </div>
+
+    <div *ngIf="showPopoverRight">
+        <strong>Decimal Degrees</strong> (separate multiple vertices with a comma or semi-colon)
+        <ul>
+            <li>up to 7 digits after the decimal</li>
+            <li>example with plus/minus: DD.DDDDD -DDD.DDDDD, DD.DDDDD -DDD.DDDD</li>
+            <li>example with direction: DD.DDDDDX DDD.DDDDX, DD.DDDDX DDD.DDDDX</li>
+        </ul>
+        <strong>Degrees minutes seconds</strong> (separate multiple vertices with a comma or semi-colon)
+        <ul>
+            <li>D=Degrees, M=Minutes, S=Seconds, X=Direction</li>
+            <li>example: DDMMSSX DDDMMSSX, DDMMSSX DDDMMSSX</li>
+        </ul>
+        <div class="popover__arrow"
+             [ngClass]="{'popover__arrow--mid-position': showPopoverMid, 'popover__arrow--right-position': !showPopoverMid}">
+        </div>
+    </div>
+</div>

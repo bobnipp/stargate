@@ -1,0 +1,18 @@
+{
+  "request": {
+    "urlPath": "/PRISMCoreDataWS",
+    "method": "POST",
+    "bodyPatterns": [
+      {
+        "matchesXPath" : "//ns2:getTarget/arg0/keyList[text()=\"1\"]",
+        "xPathNamespaces": {
+          "ns2": "http://PRISMCoreDataWS.coredataws.ws.prism.saic.com"
+        }
+      }
+    ]
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "get.target.point.1.response.xml"
+  }
+}

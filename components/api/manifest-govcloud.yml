@@ -1,0 +1,13 @@
+---
+applications:
+- name: stargate
+  buildpack: java_buildpack_offline
+  path: build/libs/stargate-0.0.1-SNAPSHOT.jar
+  instances: 2
+  services:
+   - stargate-db
+   - stargate-s3
+  env:
+    SPRING_PROFILES_ACTIVE: govcloud
+    JIRA_PROJECT_NAME: stargate-pipeline
+    JIRA_PROJECT_KEY: STAR

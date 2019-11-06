@@ -1,0 +1,52 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        maven {
+            credentials {
+                username "$System.env.NEXUS_USERNAME"
+                password "$System.env.NEXUS_PASSWORD"
+            }
+            url "https://nexus.di2e.net/nexus/content/groups/public"
+        }
+    }
+    dependencies {
+        //classpath 'no.nils:wsdl2java:0.10'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+
+jar {
+    baseName = 'prism-client'
+    version = '0.0.1-SNAPSHOT'
+}
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        credentials {
+            username "$System.env.NEXUS_USERNAME"
+            password "$System.env.NEXUS_PASSWORD"
+        }
+        url "https://nexus.di2e.net/nexus/content/groups/public"
+    }
+}
+
+dependencies {
+    compile('no.nils:wsdl2java:0.10')
+}
+
+//task generatePrismClient(type: GradleBuild) {
+//    apply plugin: 'no.nils.wsdl2java'
+//    wsdl2java {
+//        generatedWsdlDir = file("$projectDir/src/main/java")
+//        wsdlDir = file("src/main/resources/prism-wsdl")
+//        wsdlsToGenerate = [
+//            ['components/prism-client/src/main/resources/prism-wsdl/PRISMCoreDataWS.wsdl'],
+//            ['components/prism-client/src/main/resources/prism-wsdl/PRISMResearchWS.wsdl'],
+//            ['components/prism-client/src/main/resources/prism-wsdl/PRISMExNomWS.wsdl']
+//        ]
+//    }
+//    tasks = ['wsdl2java']
+//}

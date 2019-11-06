@@ -1,0 +1,27 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: shutdown,health,env
+  endpoint:
+    shutdown:
+      enabled: true
+
+server.port: 8082
+prism:
+  real: ${PRISM_HOST:https://ec2-96-127-47-237.us-gov-west-1.compute.amazonaws.com}
+  mock: http://localhost:9999
+  useMock: ${PRISM_USE_MOCK:true}
+  sessionTimeoutMilliseconds: 300000
+  soap:
+    username: ${PRISM_SOAP_USERNAME:}
+    password: ${PRISM_SOAP_PASSWORD:}
+  ui:
+    username: ${PRISM_UI_USERNAME:}
+    password: ${PRISM_UI_PASSWORD:}
+
+redis:
+  hostname: localhost
+  port: 6379
+  credentials:
+   password: password

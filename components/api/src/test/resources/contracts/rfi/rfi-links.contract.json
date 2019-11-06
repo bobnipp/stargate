@@ -1,0 +1,34 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "record1Id": {
+        "type": "string"
+      },
+      "record2Id": {
+        "type": "string"
+      },
+      "record1System": {
+        "type": "string"
+      },
+      "record2System": {
+        "type": "string"
+      },
+      "title": {
+        "type": "string"
+      },
+      "status": {
+        "type": "string"
+      }
+    },
+    "required": [
+      "record1Id",
+      "record2Id",
+      "record1System",
+      "record2System"
+
+    ],
+    "additionalProperties": false
+  }
+}

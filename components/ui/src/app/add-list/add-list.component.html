@@ -1,0 +1,18 @@
+<div class="stargate-modal-background"></div>
+
+<div class="stargate-modal">
+    <div class="stargate-modal_header">Create List</div>
+    <div>
+        <div class="stargate-modal_message">Lists are where you can organize and track requirements</div>
+        <div class="stargate-modal_fields form-field">
+            <label for="list-name">Name</label>
+            <input [(ngModel)]="listName" id="list-name"/>
+        </div>
+        <div>
+            <button id='create' class="btn-primary" [disabled]="!listName || listName.length < 1" (click)="createList()">
+                CREATE LIST
+            </button>
+            <button id="cancel" class="btn-secondary" (click)="doClose()">CANCEL</button>
+        </div>
+    </div>
+</div>

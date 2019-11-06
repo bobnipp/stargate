@@ -1,0 +1,688 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PRISMResearchWS" targetNamespace="http://PRISMResearchWS.researchws.ws.prism.saic.com" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://PRISMResearchWS.researchws.ws.prism.saic.com" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <wsdl:types>
+        <xs:schema elementFormDefault="unqualified" targetNamespace="http://PRISMResearchWS.researchws.ws.prism.saic.com" version="1.0" xmlns:tns="http://PRISMResearchWS.researchws.ws.prism.saic.com" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="getCRResearch" type="tns:getCRResearch"/>
+            <xs:element name="getCRResearchResponse" type="tns:getCRResearchResponse"/>
+            <xs:element name="getERResearch" type="tns:getERResearch"/>
+            <xs:element name="getERResearchResponse" type="tns:getERResearchResponse"/>
+            <xs:element name="getIPResearch" type="tns:getIPResearch"/>
+            <xs:element name="getIPResearchResponse" type="tns:getIPResearchResponse"/>
+            <xs:element name="getMissionResearch" type="tns:getMissionResearch"/>
+            <xs:element name="getMissionResearchResponse" type="tns:getMissionResearchResponse"/>
+            <xs:element name="getNomResearch" type="tns:getNomResearch"/>
+            <xs:element name="getNomResearchResponse" type="tns:getNomResearchResponse"/>
+            <xs:element name="getPIRResearch" type="tns:getPIRResearch"/>
+            <xs:element name="getPIRResearchResponse" type="tns:getPIRResearchResponse"/>
+            <xs:element name="getTargetResearch" type="tns:getTargetResearch"/>
+            <xs:element name="getTargetResearchResponse" type="tns:getTargetResearchResponse"/>
+            <xs:complexType name="getERResearch">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismerShortRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismerShortRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismRequest">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="keyList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="spatialSearch" type="tns:prismSpatialSearch"/>
+                            <xs:element minOccurs="0" name="id" type="xs:string"/>
+                            <xs:element minOccurs="0" name="prismId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element minOccurs="0" name="startDateFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="startDateTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactStartDate" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="stopDateFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="stopDateTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactStopDate" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="priorityFrom" type="xs:int"/>
+                            <xs:element minOccurs="0" name="priorityTo" type="xs:int"/>
+                            <xs:element minOccurs="0" name="exactPriority" type="xs:boolean"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="countryCodeList" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="geotRegionList" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="producerList" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="orgList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="owner" type="xs:string"/>
+                            <xs:element minOccurs="0" name="targetId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="modifiedOnFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="modifiedOnTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactModifiedOn" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="sortBy" type="tns:prismSortBy"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="userID" type="xs:string"/>
+                    <xs:element minOccurs="0" name="password" type="xs:string"/>
+                    <xs:element minOccurs="0" name="databaseHost" type="xs:string"/>
+                    <xs:element minOccurs="0" name="databaseSID" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resultSetSize" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismSpatialSearch">
+                <xs:sequence>
+                    <xs:element name="spatialType" type="tns:prismSpatialSearchType"/>
+                    <xs:element minOccurs="0" name="circle" type="tns:prismSpatialCircle"/>
+                    <xs:element minOccurs="0" name="polygon" type="tns:prismSpatialPolygon"/>
+                    <xs:element minOccurs="0" name="rectangle" type="tns:prismSpatialRectangle"/>
+                    <xs:element minOccurs="0" name="opAreaKey" type="xs:string"/>
+                    <xs:element minOccurs="0" name="aoiKey" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismSpatialCircle">
+                <xs:sequence>
+                    <xs:element name="centerGeo" type="tns:prismCoord"/>
+                    <xs:element name="radius" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismCoord">
+                <xs:sequence>
+                    <xs:element name="sequence" type="xs:int"/>
+                    <xs:element name="latDouble" type="xs:double"/>
+                    <xs:element name="longDouble" type="xs:double"/>
+                    <xs:element minOccurs="0" name="elevation" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismSpatialPolygon">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="test" type="tns:prismCoord"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismSpatialRectangle">
+                <xs:sequence>
+                    <xs:element name="lowerLeftGeo" type="tns:prismCoord"/>
+                    <xs:element name="upperRightGeo" type="tns:prismCoord"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getERResearchResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismerShortResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismerShortResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="erList" type="tns:prismerShort"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismResponse">
+                <xs:sequence>
+                    <xs:element name="success" type="xs:boolean"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="errorMessages" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismerShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismDataInfo">
+                <xs:sequence>
+                    <xs:element name="owner" type="xs:string"/>
+                    <xs:element name="createdBy" type="xs:string"/>
+                    <xs:element name="createdOn" type="xs:dateTime"/>
+                    <xs:element name="lastModifiedBy" type="xs:string"/>
+                    <xs:element name="lastModifiedOn" type="xs:dateTime"/>
+                    <xs:element name="prismStatus" type="xs:string"/>
+                    <xs:element minOccurs="0" name="prismState" type="tns:prismState"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getMissionResearch">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismMissionShortRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismMissionShortRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismRequest">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="keyList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="id" type="xs:string"/>
+                            <xs:element minOccurs="0" name="localId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="prismId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="standingMissionName" type="xs:string"/>
+                            <xs:element minOccurs="0" name="dateFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="dateTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactDate" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="modifiedOnFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="modifiedOnTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactModifiedOn" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="sortBy" type="tns:prismSortBy"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getMissionResearchResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismMissionShortResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismMissionShortResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="missionList" type="tns:prismMissionShort"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismMissionShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="localId" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getNomResearch">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismNomShortRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismNomShortRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismRequest">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="keyList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="spatialSearch" type="tns:prismSpatialSearch"/>
+                            <xs:element minOccurs="0" name="id" type="xs:string"/>
+                            <xs:element minOccurs="0" name="prismId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="orgList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="owner" type="xs:string"/>
+                            <xs:element minOccurs="0" name="modifiedOnFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="modifiedOnTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactModifiedOn" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="sortBy" type="tns:prismSortBy"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getNomResearchResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismNomShortResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismNomShortResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="nomList" type="tns:prismNomShort"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismNomShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="comments" type="xs:string"/>
+                    <xs:element minOccurs="0" name="justification" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nomIMINTShort" type="tns:prismNomIMINTShort"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismNomIMINTShort">
+                <xs:sequence>
+                    <xs:element name="respOrg" type="xs:string"/>
+                    <xs:element name="status" type="tns:prismNomStatus"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getCRResearch">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismcrShortRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcrShortRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismRequest">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="keyList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="spatialSearch" type="tns:prismSpatialSearch"/>
+                            <xs:element minOccurs="0" name="id" type="xs:string"/>
+                            <xs:element minOccurs="0" name="prismId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element minOccurs="0" name="startDateFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="startDateTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactStartDate" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="stopDateFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="stopDateTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactStopDate" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="priorityFrom" type="xs:int"/>
+                            <xs:element minOccurs="0" name="priorityTo" type="xs:int"/>
+                            <xs:element minOccurs="0" name="exactPriority" type="xs:boolean"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="countryCodeList" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="geotRegionList" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="sensorList" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="orgList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="owner" type="xs:string"/>
+                            <xs:element minOccurs="0" name="targetId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="modifiedOnFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="modifiedOnTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactModifiedOn" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="sortBy" type="tns:prismSortBy"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getCRResearchResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismcrShortResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcrShortResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="crList" type="tns:prismcrShort"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismcrShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getPIRResearch">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismpirRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismpirRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismRequest">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="keyList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="id" type="xs:string"/>
+                            <xs:element minOccurs="0" name="prismId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="orgList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="owner" type="xs:string"/>
+                            <xs:element minOccurs="0" name="modifiedOnFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="modifiedOnTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactModifiedOn" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="startDateFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="startDateTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactStartDate" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="stopDateFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="stopDateTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactStopDate" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="pirType" type="tns:prismpirType"/>
+                            <xs:element minOccurs="0" name="sortBy" type="tns:prismSortBy"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getPIRResearchResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismpirResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismpirResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="pirList" type="tns:prismpir"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismpir">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                    <xs:element name="respOrg" type="xs:string"/>
+                    <xs:element minOccurs="0" name="startDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="stopDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element name="pirType" type="tns:prismpirType"/>
+                    <xs:element minOccurs="0" name="parentKey" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getTargetResearch">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismTargetShortRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismTargetShortRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismRequest">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="keyList" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="typeList" type="tns:prismTargetType"/>
+                            <xs:element minOccurs="0" name="spatialSearch" type="tns:prismSpatialSearch"/>
+                            <xs:element minOccurs="0" name="id" type="xs:string"/>
+                            <xs:element minOccurs="0" name="prismId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="countryCodeList" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="geotRegionList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="owner" type="xs:string"/>
+                            <xs:element minOccurs="0" name="modifiedOnFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="modifiedOnTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactModifiedOn" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="sortBy" type="tns:prismSortBy"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getTargetResearchResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismTargetShortResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismTargetShortResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="targetList" type="tns:prismTargetShort"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismTargetShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                    <xs:element name="type" type="tns:prismTargetType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getIPResearch">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismipShortRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismipShortRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismRequest">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="keyList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="id" type="xs:string"/>
+                            <xs:element minOccurs="0" name="prismId" type="xs:string"/>
+                            <xs:element minOccurs="0" name="name" type="xs:string"/>
+                            <xs:element minOccurs="0" name="category" type="xs:string"/>
+                            <xs:element minOccurs="0" name="subCategory" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="countryCodeList" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="geotRegionList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="owner" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" minOccurs="0" name="orgList" type="xs:string"/>
+                            <xs:element minOccurs="0" name="modifiedOnFrom" type="xs:date"/>
+                            <xs:element minOccurs="0" name="modifiedOnTo" type="xs:date"/>
+                            <xs:element minOccurs="0" name="exactModifiedOn" type="xs:boolean"/>
+                            <xs:element minOccurs="0" name="sortBy" type="tns:prismSortBy"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getIPResearchResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismipShortResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismipShortResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="ipList" type="tns:prismipShort"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismipShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="prismSpatialSearchType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="CIRCLE"/>
+                    <xs:enumeration value="POLYGON"/>
+                    <xs:enumeration value="RECTANGLE"/>
+                    <xs:enumeration value="OP_AREA"/>
+                    <xs:enumeration value="AOI"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismSortBy">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ID"/>
+                    <xs:enumeration value="KEY"/>
+                    <xs:enumeration value="LASTMODIFIEDDATE"/>
+                    <xs:enumeration value="NAME"/>
+                    <xs:enumeration value="PRISMID"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismState">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ACTIVE"/>
+                    <xs:enumeration value="INACTIVE"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismNomStatus">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="APPROVE"/>
+                    <xs:enumeration value="HOLD"/>
+                    <xs:enumeration value="REWORK"/>
+                    <xs:enumeration value="SUBMITTED"/>
+                    <xs:enumeration value="VOTE"/>
+                    <xs:enumeration value="WORKING"/>
+                    <xs:enumeration value="TEMPLATE"/>
+                    <xs:enumeration value="FORWARD"/>
+                    <xs:enumeration value="SEND_TO_NSRP"/>
+                    <xs:enumeration value="SEND_TO_RMS"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismpirType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ACTIVE"/>
+                    <xs:enumeration value="CONTIGENCY"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismTargetType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="DSA"/>
+                    <xs:enumeration value="LOC"/>
+                    <xs:enumeration value="POINT"/>
+                    <xs:enumeration value="RWAC"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getPIRResearch">
+        <wsdl:part element="tns:getPIRResearch" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getPIRResearchResponse">
+        <wsdl:part element="tns:getPIRResearchResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getNomResearch">
+        <wsdl:part element="tns:getNomResearch" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getCRResearch">
+        <wsdl:part element="tns:getCRResearch" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getNomResearchResponse">
+        <wsdl:part element="tns:getNomResearchResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMissionResearch">
+        <wsdl:part element="tns:getMissionResearch" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getTargetResearch">
+        <wsdl:part element="tns:getTargetResearch" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getERResearchResponse">
+        <wsdl:part element="tns:getERResearchResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getCRResearchResponse">
+        <wsdl:part element="tns:getCRResearchResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getERResearch">
+        <wsdl:part element="tns:getERResearch" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getTargetResearchResponse">
+        <wsdl:part element="tns:getTargetResearchResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMissionResearchResponse">
+        <wsdl:part element="tns:getMissionResearchResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getIPResearchResponse">
+        <wsdl:part element="tns:getIPResearchResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getIPResearch">
+        <wsdl:part element="tns:getIPResearch" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="PRISMResearchWSEndPoint">
+        <wsdl:operation name="getERResearch">
+            <wsdl:input message="tns:getERResearch" name="getERResearch">
+            </wsdl:input>
+            <wsdl:output message="tns:getERResearchResponse" name="getERResearchResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMissionResearch">
+            <wsdl:input message="tns:getMissionResearch" name="getMissionResearch">
+            </wsdl:input>
+            <wsdl:output message="tns:getMissionResearchResponse" name="getMissionResearchResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNomResearch">
+            <wsdl:input message="tns:getNomResearch" name="getNomResearch">
+            </wsdl:input>
+            <wsdl:output message="tns:getNomResearchResponse" name="getNomResearchResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCRResearch">
+            <wsdl:input message="tns:getCRResearch" name="getCRResearch">
+            </wsdl:input>
+            <wsdl:output message="tns:getCRResearchResponse" name="getCRResearchResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPIRResearch">
+            <wsdl:input message="tns:getPIRResearch" name="getPIRResearch">
+            </wsdl:input>
+            <wsdl:output message="tns:getPIRResearchResponse" name="getPIRResearchResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getTargetResearch">
+            <wsdl:input message="tns:getTargetResearch" name="getTargetResearch">
+            </wsdl:input>
+            <wsdl:output message="tns:getTargetResearchResponse" name="getTargetResearchResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getIPResearch">
+            <wsdl:input message="tns:getIPResearch" name="getIPResearch">
+            </wsdl:input>
+            <wsdl:output message="tns:getIPResearchResponse" name="getIPResearchResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PRISMResearchWSSoapBinding" type="tns:PRISMResearchWSEndPoint">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getERResearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getERResearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getERResearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMissionResearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getMissionResearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getMissionResearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNomResearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getNomResearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getNomResearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCRResearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getCRResearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getCRResearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getPIRResearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getPIRResearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getPIRResearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getTargetResearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getTargetResearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getTargetResearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getIPResearch">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getIPResearch">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getIPResearchResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PRISMResearchWS">
+        <wsdl:port binding="tns:PRISMResearchWSSoapBinding" name="PRISMResearchWSEndPointPort">
+            <soap:address location="http://localhost:5050/PRISMResearchWS"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

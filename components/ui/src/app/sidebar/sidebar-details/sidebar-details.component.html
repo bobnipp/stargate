@@ -1,0 +1,102 @@
+<form [formGroup]="rfiForm">
+    <div class="form-group">
+        <div class="form-group_fields">
+
+            <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+                <label for="priority">Priority</label>
+                <select name="priority" id="priority" formControlName="priority" [ngClass]="{invalid: rfiForm.get('priority').invalid && submitted}" required >
+                    <option value="" selected disabled hidden>Select</option>
+                    <option *ngFor="let priority of recordSelectOptions.priorityOptions" [value]="priority.value">{{priority.value}}</option>
+                </select>
+                <div *ngIf="rfiForm.get('priority').invalid && submitted" class="invalid-message">Please select a priority - it's required</div>
+
+            </div>
+
+            <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+                    <label for="status">Status</label>
+                    <select name="status" id="status" formControlName="status">
+                        <option *ngFor="let status of recordSelectOptions.statusOptions" [value]="status.value">{{status.value}}</option>
+                    </select>
+            </div>
+
+            <div class="form-field form-field--textarea">
+                <label for="justification">Justification</label>
+                <stargate-resizing-textarea minRows="3" textAreaId="justification" textAreaControlName="justification"
+                                            textAreaPlaceholder="{{rfiForm.enabled?'What is the intended effect of the information you\'re looking for?':''}}"
+                                            [textAreaClass]="rfiForm.get('justification').invalid && submitted ? 'invalid' : ''"
+                                            [formGroup]="rfiForm"></stargate-resizing-textarea>
+                <div *ngIf="rfiForm.get('justification').invalid && submitted" class="invalid-message">Please include a justification - it's required</div>
+            </div>
+
+            <div class="form-field form-field--textarea research">
+                <label for="prevResearch">Previous Research/Background</label>
+                <stargate-resizing-textarea minRows="3" textAreaId="prevResearch" textAreaControlName="prevResearch"
+                                            [formGroup]="rfiForm"></stargate-resizing-textarea>
+            </div>
+        </div>
+    </div>
+
+    <stargate-sidebar-links *ngIf="record.id" [rfiId]="record.id" [recordType]="record.recordType"
+                            [inputLinks]="record.links || []"></stargate-sidebar-links>
+
+    <div id="info" class="form-group">
+        <div class="{{showDetails? 'form-group_label-open' : 'form-group_label-closed'}}" (click)="toggleDetailsView()">
+            <div class="arrow"></div>
+            <div class="label">Info</div>
+        </div>
+        <div *ngIf="showDetails">
+            <div class="subform-togglers">
+                <button type="button" [class]="activeRfiSubForm === 'About' ? 'toggle-active' : 'toggle'"
+                        (click)="toggle('About')">About
+                </button>
+                <button type="button"
+                        [class]="activeRfiSubForm === 'Collection' ? 'toggle-active' : 'toggle'"
+                        (click)="toggle('Collection')">Collection
+                </button>
+                <button type="button"
+                        [class]="activeRfiSubForm === 'Targets' ? 'toggle-active' : 'toggle'"
+                        (click)="toggle('Targets')">Targets
+                </button>
+                <button type="button"
+                        [class]="activeRfiSubForm === 'Sensors' ? 'toggle-active' : 'toggle'"
+                        (click)="toggle('Sensors')">Sensors
+                </button>
+            </div>
+
+            <stargate-sidebar-about
+                    *ngIf="activeRfiSubForm === 'About'"
+                    class="form-group"
+                    data-aid="about-section"
+                    [rfiForm]="rfiForm"
+                    [recordSelectOptions]="recordSelectOptions">
+            </stargate-sidebar-about>
+
+            <stargate-sidebar-collection
+                    *ngIf="activeRfiSubForm === 'Collection'"
+                    class="form-group"
+                    data-aid="collection-section"
+                    [rfiForm]="rfiForm"
+                    [recordSelectOptions]="recordSelectOptions"
+                    [record]="record">
+            </stargate-sidebar-collection>
+
+            <stargate-sidebar-target
+                    *ngIf="activeRfiSubForm === 'Targets'"
+                    class="form-group"
+                    data-aid="target-section"
+                    [rfiId]="record.id"
+                    [rfiForm]="rfiForm"
+                    [recordSelectOptions]="recordSelectOptions">
+            </stargate-sidebar-target>
+
+            <stargate-sidebar-sensor
+                    *ngIf="activeRfiSubForm === 'Sensors'"
+                    class="form-group"
+                    data-aid="sensor-section"
+                    [rfiId]="record.id"
+                    [rfiForm]="rfiForm"
+                    [recordSelectOptions]="recordSelectOptions">
+            </stargate-sidebar-sensor>
+        </div>
+    </div>
+</form>

@@ -1,0 +1,84 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: shutdown,health,env
+  endpoint:
+    shutdown:
+      enabled: true
+
+server:
+  port: 8081
+uaa-base-url: http://stargate-uaa.apps.vi2e.io
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost/stargate?serverTimezone=UTC&verifyServerCertificate=false&useSSL=true
+    username: root
+  mail:
+    host: localhost
+    port: 1025
+
+spring.flyway.out-of-order: true
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    org.springframework.security: WARN
+
+spring.output.ansi.enabled: ALWAYS
+
+security:
+  oauth2:
+    client:
+      accessTokenUri: ${uaa-base-url}/oauth/token
+      userAuthorizationUri: ${uaa-base-url}/oauth/authorize
+      clientId: stargate
+      clientSecret: stargatesecret
+      scope: stargate.read,stargate.write,openid,profile
+    resource:
+      tokenInfoUri: ${uaa-base-url}/oauth/check_token
+      user-info-uri: ${uaa-base-url}/userinfo
+      preferTokenInfo: true
+      jwt:
+        key-value: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxTcuVfC7IXHpAbalvQl4
+          4b0NO3Pa00XRqdfEg8bGdrGMC1oqAi9bGO8GijknkK8MTAlDuZ1PSmvp0U+mPvl1
+          r41Bp3bu6Wt3pOoww9UTBYJUtW5SCkcegOwNYLfuDXu8Rx1AgLS1bNxAVBXQ3obr
+          lcYAU5h1wiIu2Qi4YGH3egxynM5uxzYg7qDXQGDuMSCWf3Ceagrl6nukncFHY0Zg
+          IAgOj9tNW8WY05S7vBHv8aaso0SGeTVsJ7gfwZxvIQwJb4m8oJ9tHwHeNuULPrFc
+          2t+47uZL/38U+HD5KuxrR3iobzBeli2hBc0gqigGfTspENwWu2oHa8DP+hq9rVxn
+          5QIDAQAB
+          -----END PUBLIC KEY-----
+
+emailServer:
+  protocol: imaps
+  host: imap.gmail.com
+  username: pivotal.stargate
+  password: ${EMAIL_PASSWORD:}
+  periodInSeconds: 900
+
+featureFlags:
+  emailTriggers: false
+
+jira:
+  url: https://stargate-jira.cfapps.io
+  username: ${JIRA_USERNAME:}
+  password: ${JIRA_PASSWORD:}
+  project:
+    name: ${JIRA_PROJECT_NAME:}
+    key: ${JIRA_PROJECT_KEY:}
+
+prism-adapter:
+  host-name: http://localhost:8082
+
+mowDomain: ${MOW_DOMAIN:mapbeta.gvslabs.com}
+
+s3:
+  endpointUrl: http://localhost:4572/
+  accessKey: ${vcap.services.stargate-s3.credentials.access_key_id:notused}
+  secretKey: ${vcap.services.stargate-s3.credentials.secret_access_key:notused}
+  bucketName: ${vcap.services.stargate-s3.credentials.bucket:stargate}
+  region: ${vcap.services.stargate-s3.credentials.region:notused}

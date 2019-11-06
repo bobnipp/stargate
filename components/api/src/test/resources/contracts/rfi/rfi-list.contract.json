@@ -1,0 +1,41 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {"type": "number"},
+      "title": {"type": "string"},
+      "coordinates": {"type": "string"},
+      "status": {"type": "string"},
+      "priority": {"type": "string"},
+      "justification": {"type": "string"},
+      "createdOn": {"type": "string"},
+      "targets": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {"type": "number"},
+            "rfiId": {"type": "number"},
+            "name": {"type": "string"},
+            "type": {"type": "string"},
+            "radius": {"type": "number"},
+            "radiusUnit": {"type": "string"},
+            "coordinates": {"type": "string"}
+          },
+          "additionalProperties": false,
+          "required": ["rfiId"]
+        }
+      },
+      "city": {"type": "string"},
+      "country": {"type": "string"},
+      "nai": {"type": "string"},
+      "operation": {"type": "string"},
+      "poc": {"type": "string"},
+      "prevResearch": {"type": "string"},
+      "region": {"type": "string"}
+    },
+    "required": ["id", "title"],
+    "additionalProperties": true
+  }
+}

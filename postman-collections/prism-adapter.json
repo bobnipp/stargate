@@ -1,0 +1,104 @@
+{
+	"info": {
+		"_postman_id": "59e73301-ac56-41b1-b341-1e50fce1e2e9",
+		"name": "Prism Adapter",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Requirements",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{prism-adapter-host}}/requirements",
+					"host": [
+						"{{prism-adapter-host}}"
+					],
+					"path": [
+						"requirements"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find requirement by Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{prism-adapter-host}}/requirements/123abc",
+					"host": [
+						"{{prism-adapter-host}}"
+					],
+					"path": [
+						"requirements",
+						"123abc"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find requirement by Id - Invalid",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{prism-adapter-host}}/requirements/nope",
+					"host": [
+						"{{prism-adapter-host}}"
+					],
+					"path": [
+						"requirements",
+						"nope"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Find requirement by partial Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{prism-adapter-host}}/requirements/search/10x",
+					"host": [
+						"{{prism-adapter-host}}"
+					],
+					"path": [
+						"requirements",
+						"search",
+						"10x"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Prism health",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "{{prism-adapter-host}}/prism-health",
+					"host": [
+						"{{prism-adapter-host}}"
+					],
+					"path": [
+						"prism-health"
+					]
+				},
+				"description": "Check the health of the mock prism service"
+			},
+			"response": []
+		}
+	]
+}

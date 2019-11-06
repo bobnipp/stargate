@@ -1,0 +1,4 @@
+ALTER TABLE imm_rfis
+  MODIFY COLUMN priority VARCHAR(100);
+ALTER TABLE imm_rfis
+  MODIFY COLUMN status VARCHAR(100);

@@ -1,0 +1,67 @@
+{
+  "type": "object",
+  "oneOf": [
+    {
+      "properties": {
+        "data": {
+          "type": "object",
+          "properties": {
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "data": {
+                    "type": "object",
+                    "properties": {
+                      "recordId": {
+                        "type": "string"
+                      },
+                      "recordName": {
+                        "type": "string"
+                      },
+                      "prismState": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      },
+                      "prismStatus": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "data"
+                ]
+              }
+            }
+          },
+          "required": [
+            "children"
+          ]
+        },
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "data", "success"
+      ]
+    },
+    {
+      "properties": {
+        "msg": {
+          "type": "string"
+        },
+        "success": {
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "msg", "success"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+.search {
+  position: relative;
+  background-color: #ffffff;
+  margin: 0 0 .75rem .5rem;
+}
+
+.search-icon {
+  position: absolute;
+  width: .875rem;
+  height: .875rem;
+  margin: .5rem
+}
+
+.search-input {
+  height: 2rem;
+  border-radius: 2px;
+  border-style: none;
+  background-color: transparent;
+  padding-left: 28px;
+  font-size: .874rem;
+  resize: none;
+  box-sizing: border-box;
+  width: 16rem;
+
+  &:focus {
+    border-bottom: solid 2px #0096d6;
+    outline: none;
+  }
+}
+

@@ -1,0 +1,23 @@
+apply plugin: 'java'
+
+group = 'com.afresearchlab'
+version = '0.0.1-SNAPSHOT'
+archivesBaseName = 'prism-adapter-models'
+sourceCompatibility = 1.8
+
+repositories {
+    maven {
+        credentials {
+            username "$System.env.NEXUS_USERNAME"
+            password "$System.env.NEXUS_PASSWORD"
+        }
+        url "https://nexus.di2e.net/nexus/content/groups/public"
+    }
+}
+
+dependencies {
+    compileOnly('org.projectlombok:lombok:1.16.20')
+    compile 'com.fasterxml.jackson.core:jackson-annotations:2.9.7'
+}
+
+defaultTasks 'clean', 'test', 'assemble'

@@ -1,0 +1,16 @@
+.history-entry {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 14px;
+
+  &__event {
+    font-weight: 600;
+    color: #1f2226;
+  }
+
+  &__date {
+    font-weight: 300;
+    color: #667180;
+  }
+}

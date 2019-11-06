@@ -1,0 +1,11 @@
+{
+  "type": "object",
+  "properties": {
+    "rfiId": {"type": "number"},
+    "text": {"type": "string"},
+    "username": {"type": "string"},
+    "timestamp": {"type": "string"}
+  },
+  "required": ["rfiId", "text", "username", "timestamp"],
+  "additionalProperties": false
+}

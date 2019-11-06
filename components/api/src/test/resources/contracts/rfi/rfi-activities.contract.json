@@ -1,0 +1,15 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "rfiId": {"type": "number"},
+      "id": {"type": "number"},
+      "text": {"type": "string"},
+      "username": {"type": "string"},
+      "timestamp": {"type": "string"}
+    },
+    "required": ["rfiId", "id", "username", "timestamp"],
+    "additionalProperties": false
+  }
+}

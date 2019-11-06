@@ -1,0 +1,21 @@
+<div *ngIf="loading" class="load">
+    <div class="load-container">
+        <div class="loading">
+            <div class="loading-bar">
+                <div class="bar"></div>
+            </div>
+        </div>
+    </div>
+    <div class="text-container">
+        <p class="load-text">Loading Map and Assets</p>
+    </div>
+</div>
+<div class="map">
+    <div id="the-map" class="world-map"></div>
+</div>
+<sidebar-map-list [activeRecordIds]="activeRecordIds"
+                  [combinedList]="combinedList"
+                  [mapLoading]="loading"
+                  (constrainResults)="doConstrainResults($event)"
+                  (revealLocation)="revealLocation($event)">
+</sidebar-map-list>

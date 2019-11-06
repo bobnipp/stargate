@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 1
+
+sendgrid:
+  apiKey: ${SENDGRID_API_KEY:}
+
+prism-adapter:
+  host-name: https://prism-adapter.cfapps.io

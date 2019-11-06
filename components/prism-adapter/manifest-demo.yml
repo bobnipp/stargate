@@ -1,0 +1,10 @@
+---
+applications:
+- name: prism-adapter
+  buildpack: java_buildpack_offline
+  path: build/libs/prism-adapter-0.0.1-SNAPSHOT.jar
+  instances: 2
+  env:
+    SPRING_PROFILES_ACTIVE: demo
+  services:
+  - prism-cache

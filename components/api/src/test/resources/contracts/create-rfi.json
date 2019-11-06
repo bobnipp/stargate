@@ -1,0 +1,36 @@
+{
+  "type": "object",
+  "properties": {
+    "title": {
+      "type": "string"
+    },
+    "country": {
+      "type": "string"
+    },
+    "latitude": {
+      "type": "number"
+    },
+    "longitude": {
+      "type": "number"
+    },
+    "city": {
+      "type": "string"
+    },
+    "mgrs": {
+      "type": "string"
+    },
+    "province": {
+      "type": "string"
+    },
+    "nai": {
+      "type": "string"
+    }
+  },
+  "required": [
+    "title",
+    "country",
+    "latitude",
+    "longitude"
+  ],
+  "additionalProperties": false
+}

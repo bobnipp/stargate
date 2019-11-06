@@ -1,0 +1,12 @@
+{
+  "request": {
+    "method": "POST",
+    "url": "/prism-webapp/j_spring_security_check"
+  },
+  "response": {
+    "status": 302,
+    "headers": {
+      "Set-Cookie": "JSESSIONID=sessionId;"
+    }
+  }
+}

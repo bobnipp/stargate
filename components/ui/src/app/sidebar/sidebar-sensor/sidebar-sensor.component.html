@@ -1,0 +1,43 @@
+<form [formGroup]="rfiForm">
+    <div formArrayName="sensors" class="sensors" *ngFor="let sensor of rfiForm.get('sensors').controls; let i = index">
+        <div [attr.data-aid]="'sensor-' + i" class="form-group_fields" [formGroupName]="i">
+            <div class="full-span">
+                <div class="sensor-header sensor">Sensor #{{i + 1}}</div>
+                <div class="menu-icon sensor-menu" (click)="openMenu(i)" [id]="'sensor-menu-' + i"
+                     *ngIf="rfiForm.enabled">
+                    <div *ngIf="showMenu === i" (clickOutside)="closeMenu()" [delayClickOutsideInit]=true>
+                        <div (click)="deleteSensor(i)" [id]="'sensor-delete-' + i" class="delete">Delete</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-field"
+                 [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+                <label [for]="'sensor-type-' + i">Sensor Type</label>
+                <select name="sensor-type" [id]="'sensor-type-' + i" formControlName="sensorType">
+                    <option value="" selected></option>
+                    <option value="EO">EO</option>
+                    <option value="FMV">FMV</option>
+                    <option value="IR">IR</option>
+                    <option value="SAR">SAR</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label [for]="'sensor-' + i">Sensor</label>
+                <input [id]="'sensor-' + i" formControlName="sensor"/>
+            </div>
+            <div class="form-field">
+                <label [for]="'sensor-mode-' + i">Mode</label>
+                <input [id]="'sensor-mode-' + i" formControlName="mode"/>
+            </div>
+            <div class="form-field">
+                <label [for]="'sensor-rq-' + i">Required Quality (NIIRS)</label>
+                <input type="number" [id]="'sensor-rq-' + i" formControlName="requiredQuality"/>
+            </div>
+            <div class="form-field">
+                <label [for]="'sensor-dq-' + i">Desired Quality (NIIRS)</label>
+                <input type="number" [id]="'sensor-dq-' + i" formControlName="desiredQuality"/>
+            </div>
+        </div>
+    </div>
+    <add-button *ngIf="rfiForm.enabled" buttonText="Add a Sensor" (click)="addSensor()"></add-button>
+</form>

@@ -1,0 +1,2 @@
+ALTER TABLE imm_rfis
+  ADD COLUMN eeis TEXT

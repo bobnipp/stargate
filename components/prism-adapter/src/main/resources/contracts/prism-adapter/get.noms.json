@@ -1,0 +1,13 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {"type": "string"},
+      "title": {"type": "string"},
+      "status": {"type": "string"}
+    },
+    "additionalProperties": false,
+    "required": ["id", "title", "status"]
+  }
+}

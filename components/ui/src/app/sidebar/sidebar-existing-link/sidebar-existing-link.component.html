@@ -1,0 +1,19 @@
+<div class="links-list-item" [@animateState]="highlightState">
+    <div class="link-system">{{!!rfiId && (rfiId.toString() === link.record2Id) &&
+        link.record1System || link.record2System}}
+    </div>
+    <div (click)="openLinkedObject(link)"
+         [class]="linkClass">
+        #{{!!rfiId && (rfiId.toString() === link.record2Id)
+        && link.record1Id || link.record2Id }}
+    </div>
+    <div class="link-title">{{link.title}}</div>
+    <div class="link-status badge" *ngIf="!!link.status">{{link.status === 'TO_DO' ? 'TO DO' : link.status}}
+    </div>
+
+    <div class="menu-icon link-menu" (click)="toggleMenu(index)" [id]="'link-menu-' + index">
+        <div *ngIf="displayedMenuIndex === index" class="menu" (clickOutside)="closeMenu()" [delayClickOutsideInit]=true>
+            <div (click)="deleteLink()" [id]="'link-delete-' + index" class="delete">Delete</div>
+        </div>
+    </div>
+</div>

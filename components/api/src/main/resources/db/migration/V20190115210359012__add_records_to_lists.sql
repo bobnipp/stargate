@@ -1,0 +1,5 @@
+ALTER TABLE lists ADD COLUMN records JSON;
+
+UPDATE lists SET records = JSON_ARRAY();
+
+ALTER TABLE lists MODIFY records JSON NOT NULL;

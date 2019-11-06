@@ -1,0 +1,47 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:getTargetResponse xmlns:ns2="http://PRISMCoreDataWS.coredataws.ws.prism.saic.com">
+            <return>
+                <success>true</success>
+                <prismTargetList>
+                    <key>4</key>
+                    <id>PDSDFAASDFSADF</id>
+                    <prismId>PDSDFAASDFSADF:PRISM</prismId>
+                    <name>SDFAASDFSADFA</name>
+                    <type>DSA</type>
+                    <dataInfo>
+                        <owner>PRISM</owner>
+                        <createdBy>RANDREWS (randrews)</createdBy>
+                        <createdOn>2018-10-19T11:15:34.000Z</createdOn>
+                        <lastModifiedBy>RANDREWS (randrews)</lastModifiedBy>
+                        <lastModifiedOn>2018-10-19T11:15:34.000Z</lastModifiedOn>
+                        <prismStatus>N</prismStatus>
+                    </dataInfo>
+                    <dsa>
+                        <size>6.153923566E9</size>
+                        <coordinates>
+                            <sequence>0</sequence>
+                            <latDouble>38.8758676</latDouble>
+                            <longDouble>-104.8987839</longDouble>
+                        </coordinates>
+                        <coordinates>
+                            <sequence>1</sequence>
+                            <latDouble>38.8858676</latDouble>
+                            <longDouble>-104.8987839</longDouble>
+                        </coordinates>
+                        <coordinates>
+                            <sequence>2</sequence>
+                            <latDouble>38.8858676</latDouble>
+                            <longDouble>-105</longDouble>
+                        </coordinates>
+                        <coordinates>
+                            <sequence>3</sequence>
+                            <latDouble>38.8758676</latDouble>
+                            <longDouble>-105</longDouble>
+                        </coordinates>
+                    </dsa>
+                </prismTargetList>
+            </return>
+        </ns2:getTargetResponse>
+    </soap:Body>
+</soap:Envelope>

@@ -1,0 +1,36 @@
+textarea {
+  border-radius: 2px;
+  border-style: none;
+  box-sizing: border-box;
+  background-color: #f2f7fc;
+  padding: .3125rem .5625rem .5rem .5625rem;
+  font-size: .874rem;
+  resize: none;
+  width: 100%;
+
+  &:disabled:not(.title-input) {
+    background-color: #ffffff;
+    border-radius: .125rem;
+    border: .0625rem solid #dee5eb;
+  }
+
+  &:focus {
+    box-shadow: 0 .125rem #0096d6;
+    outline: none;
+  }
+
+  &.invalid {
+    background-color: #fae5e8;
+  }
+
+  &.coords {
+    padding-right: 2.5rem;
+  }
+
+  min-height: 0;
+  margin-bottom: -.1rem;
+}
+
+form.resizing {
+  margin-top: 0;
+}

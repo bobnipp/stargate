@@ -1,0 +1,45 @@
+.system-option-container {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  position: relative;
+  margin: 1.5rem 1.5rem 0 1.5rem;
+
+  .filter-checkbox {
+    margin: 0;
+  }
+
+  &:first-of-type {
+    margin: 0 1.5rem 0 1.5rem;
+  }
+
+  &:last-of-type {
+    margin: 1.5rem 1.5rem 1.5rem 1.5rem;
+  }
+}
+
+.health-check {
+
+  & > .health-check_cache-age {
+    font-size: .75rem;
+    font-style: italic;
+  }
+
+  & > .up {
+    color: #4F9748;
+    font-size: 1rem;
+    vertical-align: bottom;
+  }
+
+  & > .up_old {
+    color: #E2994B;
+    font-size: 1rem;
+    vertical-align: bottom;
+  }
+
+  & > .down {
+    color: #d54a1f;
+    font-size: 1rem;
+    vertical-align: bottom;
+  }
+}

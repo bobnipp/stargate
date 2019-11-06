@@ -1,0 +1,20 @@
+<div class="system-option-container">
+    <div class="filter-checkbox">
+        <div (click)="toggleFilter()">
+            <input hidden type="checkbox" [id]="'option-' + option.id" [value]="option.id"
+                   [checked]="isChecked"/>
+            <span class="filter-checkbox_checkbox" data-aid="filter__checkbox"></span>
+        </div>
+        <label class="filter-label"
+               [for]="'option-' + option.id">{{ label }}</label>
+    </div>
+    <div *ngIf="!loading" class="health-check">
+        <span class="health-check_cache-age">
+            {{ lastSaveText }}
+        </span>
+        <i class="material-icons {{ className }}">
+            {{ icon }}
+        </i>
+    </div>
+    <div *ngIf="loading" class="spinner"></div>
+</div>

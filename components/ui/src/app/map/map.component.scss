@@ -1,0 +1,92 @@
+.map {
+  height: 100%;
+
+  .world-map {
+    height: 100%;
+    position: relative;
+
+    .info-window {
+      width: 17.875rem;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+
+      .title {
+        font-weight: bold;
+        width: 75%;
+      }
+
+      .badge {
+        width: 25%;
+        height: 1.5rem;
+      }
+
+      .id {
+        padding-top: .25rem;
+        width: 100%;
+        font-size: .625rem;
+      }
+
+    }
+  }
+}
+
+.load {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+}
+
+.load-container {
+  width: calc(100% - 27rem);
+  display: flex;
+  justify-content: center;
+  margin-top: 15rem;
+}
+
+.loading {
+  width: 300px;
+  height: 4px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #DEE5EB;
+}
+
+.bar {
+  float: left;
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #3681a8;
+}
+
+.loading-bar .bar {
+  animation: load 2s cubic-bezier(.43, .43, .43, .43) infinite;
+}
+
+@keyframes load {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(220px, 0);
+  }
+}
+
+.text-container {
+  width: calc(100% - 27rem);
+  display: flex;
+  justify-content: center;
+}
+
+.load-text {
+  display: block;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  text-align: center;
+  color: #1f2226;
+}

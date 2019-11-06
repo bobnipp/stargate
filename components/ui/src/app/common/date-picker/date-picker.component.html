@@ -1,0 +1,27 @@
+<div class="form-field">
+    <label [for]="attributeName">{{ displayName }}</label>
+    <input class="date-input" #dateInput
+           [id]="attributeName"
+           (focus)="onFocus()"
+           [placeholder]="dateMask"
+           (select)="preventSelect()"
+           (keydown)="handleBackspace($event)"
+           (keyup)="handleInput($event)"
+           [attr.maxlength]="dateMask.length"
+           [disabled]="formGroup.disabled"
+           [value]="initialValue"/>
+    <span *ngIf="formGroup.enabled" (click)="toggleDatePicker()" [id]="'img_'+attributeName">
+        <img src="/assets/img/date-picker.svg"/>
+    </span>
+    <div *ngIf="datePickerOpen" [class]="datePickerClasses" (clickOutside)="closeDatePicker()"
+         [delayClickOutsideInit]=true>
+        <owl-date-time-inline class="owl-date-time-override"
+                              [(ngModel)]="datePickerSelectedDate"></owl-date-time-inline>
+        <div class="date-time-picker_container_actions">
+            <button type="button" (click)="toggleDatePicker()">SET
+            </button>
+            <button type="button" (click)="closeDatePicker()">CANCEL
+            </button>
+        </div>
+    </div>
+</div>

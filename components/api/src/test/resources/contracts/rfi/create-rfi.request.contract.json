@@ -1,0 +1,80 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {"type": "number"},
+    "title": {"type": "string"},
+    "country": {"type": "string"},
+    "coordinates": {"type": "string"},
+    "city": {"type": "string"},
+    "mgrs": {"type": "string"},
+    "region": {"type": "string"},
+    "nai": {"type": "string"},
+    "priority": {"type": "string"},
+    "status": {"type": "string"},
+    "justification": {"type": "string"},
+    "prevResearch": {"type": "string"},
+    "requirementTypeId": {"type": "number"},
+    "subWorkflowId": {"type": "number"},
+    "classificationId": {"type": "number"},
+    "caveatId": {"type": "number"},
+    "submittingOrgId": {"type": "number"},
+    "nipfCodeId": {"type": "number"},
+    "pirNameId": {"type": "number"},
+    "centcomIsrRoleId": {"type": "number"},
+    "poc": {"type": "string"},
+    "customClassification": {"type": "string"},
+    "operation": {"type": "string"},
+    "collectionStartDate": {"type": "string"},
+    "collectionEndDate": {"type": "string"},
+    "collectionTerm": {"type": "string"},
+    "collectionType": {"type": "string"},
+    "assignedTeamId": {"type": "number"},
+    "assignee": {"type": "string"},
+    "collectionGuidance": {"type": "string"},
+    "activities": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "number"},
+          "rfiId": {"type": "number"},
+          "text": {"type": "string"},
+          "username": {"type": "string"},
+          "timestamp": {"type": "string"}
+        }
+      }
+    },
+    "links": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": {"type": "string"},
+          "originatingSystem": {"type": "string"},
+          "rfiId": {"type": "number"}
+        }
+      }
+    },
+    "eeis": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "targets": {
+      "type": "array",
+      "items": {
+        "properties": {
+          "id": {"type": "number"},
+          "rfiId": {"type": "number"},
+          "name": {"type": "string"},
+          "type": {"type": "string"},
+          "radius": {"type": "number"},
+          "radiusUnit": {"type": "string"},
+          "coordinates": {"type": "string"}
+        }
+      }
+    }
+  },
+  "required": ["title", "country"]
+}

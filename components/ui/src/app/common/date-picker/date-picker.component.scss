@@ -1,0 +1,32 @@
+@import '~variables.scss';
+
+.date-time-picker_container_actions {
+  display: flex;
+  width: 100%;
+  height: 2em;
+  box-shadow: 0 0 5px -3px rgba(0,0,0,.2), 0 0 10px 1px rgba(0,0,0,.14), 0 0 14px 2px rgba(0,0,0,.12);
+
+  button {
+    width: 50%;
+    height: 100%;
+    z-index: 1001;
+    border: none;
+    color: #3681a8;
+    font-size: .875rem;
+    font-weight: 600;
+
+    &:hover {
+      background-color: #dee5eb;
+    }
+  }
+}
+
+.date-time-picker {
+  position: absolute;
+  top: 3.25rem;
+  right: 0rem;
+}
+
+.collectionStartDate {
+  right: -4.1rem;
+}

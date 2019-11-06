@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="26px" height="44px" viewBox="0 0 26 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: sketchtool 51.1 (57501) - http://www.bohemiancoding.com/sketch -->
+    <title>4B95ED59-07F0-4E82-9850-DB38C3997D72</title>
+    <desc>Created with sketchtool.</desc>
+    <defs>
+        <ellipse id="path-1" cx="12.25" cy="40" rx="4" ry="2"></ellipse>
+        <filter x="-18.8%" y="-37.5%" width="137.5%" height="175.0%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="0.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.25 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+    </defs>
+    <g id="IMM---July" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Styleguide---Buttons" transform="translate(-807.000000, -161.000000)">
+            <g id="pinActive" transform="translate(808.000000, 162.000000)">
+                <g id="Group-10">
+                    <g id="Oval-3" fill="black" fill-opacity="1">
+                        <use filter="url(#filter-2)" xlink:href="#path-1"></use>
+                    </g>
+                    <path d="M5.10632295,22.4288193 C1.6354068,20.13058 -0.5,16.2473094 -0.5,12 C-0.5,5.09644063 5.09644063,-0.5 12,-0.5 C18.9035594,-0.5 24.5,5.09644063 24.5,12 C24.5,16.2854051 22.3258766,20.198701 18.804409,22.4873971 L12.3142529,38.7408218 L5.10632295,22.4288193 Z" id="Combined-Shape" stroke="#FFFFFF" fill="#D54A1F"></path>
+                    <circle id="Oval-2-Copy" fill="#943619" cx="12" cy="12" r="4"></circle>
+                </g>
+                <g id="Group-4-Copy-4">
+                    <g id="Requests-Copy-2"></g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

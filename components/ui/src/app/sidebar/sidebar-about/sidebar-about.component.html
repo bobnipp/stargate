@@ -1,0 +1,101 @@
+<form [formGroup]="rfiForm">
+    <div class="form-group_fields">
+        <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+            <label for="requestType">Requirement Type</label>
+            <select id="requestType" formControlName="requirementTypeId">
+                <option value="null" selected></option>
+                <option *ngFor="let requirementTypeOption of recordSelectOptions.requirementTypeOptions"
+                        [value]="requirementTypeOption.id">{{requirementTypeOption.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+            <label for="subWorkflow">CRM Sub-Workflow</label>
+            <select id="subWorkflow" formControlName="subWorkflowId">
+                <option value="null" selected></option>
+                <option *ngFor="let subWorkflowOption of recordSelectOptions.subWorkflowOptions"
+                        [value]="subWorkflowOption.id">{{subWorkflowOption.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+            <label for="classification">Classification</label>
+            <select id="classification" formControlName="classificationId">
+                <option value="null" selected></option>
+                <option *ngFor="let classificationOption of recordSelectOptions.classificationOptions"
+                        [value]="classificationOption.id">{{classificationOption.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-field">
+            <label for="customClassification">Custom Classification</label>
+            <stargate-resizing-textarea textAreaId="customClassification" textAreaControlName="customClassification"
+                                        maxLength="100" [formGroup]="rfiForm"></stargate-resizing-textarea>
+        </div>
+
+        <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+            <label for="caveat">Caveat</label>
+            <select id="caveat" formControlName="caveatId">
+                <option value="null" selected></option>
+                <option *ngFor="let caveatOption of recordSelectOptions.caveatOptions"
+                        [value]="caveatOption.id">{{caveatOption.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+            <label for="submittingOrg">Submitting Organization</label>
+            <select id="submittingOrg" formControlName="submittingOrgId">
+                <option value="null" selected></option>
+                <option *ngFor="let submittingOrgOption of recordSelectOptions.submittingOrgOptions"
+                        [value]="submittingOrgOption.id">{{submittingOrgOption.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-field form-field--textarea">
+            <label for="poc">POC(s)</label>
+            <stargate-resizing-textarea minRows="3" textAreaId="poc" textAreaControlName="poc"
+                                        textAreaPlaceholder="{{rfiForm.enabled?'Name, number, email etc.':''}}"
+                                        [formGroup]="rfiForm"></stargate-resizing-textarea>
+        </div>
+
+        <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+            <label for="nipfCode">NIPF Code</label>
+            <select id="nipfCode" formControlName="nipfCodeId">
+                <option value="null" selected></option>
+                <option *ngFor="let nipfCodeOption of recordSelectOptions.nipfCodeOptions"
+                        [value]="nipfCodeOption.id">{{nipfCodeOption.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+            <label for="pirName">PIR Name</label>
+            <select id="pirName" formControlName="pirNameId">
+                <option value="null" selected></option>
+                <option *ngFor="let pirNameOption of recordSelectOptions.pirNameOptions"
+                        [value]="pirNameOption.id">{{pirNameOption.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+            <label for="centcomIsrRole">CENTCOM ISR Role</label>
+            <select id="centcomIsrRole" formControlName="centcomIsrRoleId">
+                <option value="null" selected></option>
+                <option *ngFor="let centcomIsrRoleOption of recordSelectOptions.centcomIsrRoleOptions"
+                        [value]="centcomIsrRoleOption.id">{{centcomIsrRoleOption.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-field">
+            <label for="operation">Operation</label>
+            <stargate-resizing-textarea textAreaId="operation" textAreaControlName="operation" maxLength="100" [formGroup]="rfiForm"></stargate-resizing-textarea>
+        </div>
+    </div>
+</form>

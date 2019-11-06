@@ -1,0 +1,21 @@
+.links-list-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: .5rem .5rem .5rem 1rem;
+  border-bottom: 1px solid #e0e0e0;
+
+  .title {
+    flex: 1;
+    font-size: 1.125rem;
+    align-self: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+.list-table_link-items {
+  height: calc(100% - 2.625rem);
+}

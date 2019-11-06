@@ -1,0 +1,67 @@
+.click-area {
+  display: inline-block;
+
+  .button-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: .5rem;
+    margin-bottom: 1rem;
+    cursor: pointer;
+
+    button {
+      background-color: #3681a8;
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 90px;
+      color: #ffffff;
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      border: none;
+
+      i {
+        font-size: 1.125rem;
+      }
+
+      &:disabled {
+        background-color: #1f2226;
+        color: #1f2226;
+        box-shadow: none;
+      }
+
+      &:hover {
+        background-color: #001f3b;
+        border: 0;
+        box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.24), 0 0 8px 0 rgba(0, 0, 0, 0.12), 0 2px 2px 0 rgba(0, 0, 0, 0.24), 0 0 2px 0 rgba(0, 0, 0, 0.12);
+      }
+
+      &:active {
+        border: 0;
+        background-color: #236689;
+        color: #ffffff;
+        box-shadow: inset 0 2px 3px 0 #000000;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    p {
+      margin-left: .35rem;
+      font-size: 14px;
+      font-weight: 400;
+      color: #3681a8;
+
+      &:hover {
+        color: #001f3b;
+      }
+
+      &:active {
+        color: #236689;
+      }
+    }
+  }
+}
+

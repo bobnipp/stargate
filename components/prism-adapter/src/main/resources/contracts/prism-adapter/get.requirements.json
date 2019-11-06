@@ -1,0 +1,6 @@
+{
+  "type": "array",
+  "items": {
+    "$ref": "resource:/contracts/prism-adapter/definitions.json#/requirement"
+  }
+}

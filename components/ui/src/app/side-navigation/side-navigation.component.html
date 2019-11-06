@@ -1,0 +1,5 @@
+<div class="sidenav">
+    <button id="map-button" [ngClass]="{active: selectedNav === 'MAP'}" (click)="onTabSelect('MAP')"><i class="material-icons">map</i></button>
+    <button id="list-button" [ngClass]="{active: selectedNav === 'LIST'}" (click)="onTabSelect('LIST')"><i class="material-icons">view_list</i></button>
+    <button id="add-button" class="create" (click)="openCreateForm()"><i class="material-icons">add</i></button>
+</div>

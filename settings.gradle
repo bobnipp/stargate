@@ -1,0 +1,7 @@
+include 'components:api'
+include 'components:ui'
+include 'components:prism-adapter-models'
+include 'components:prism-adapter'
+include 'acceptance'
+include 'components:prism-mock'
+include 'components:prism-client'

@@ -1,0 +1,111 @@
+<form [formGroup]="rfiForm">
+    <div class="form-group_fields">
+        <div class="target-header">Basic Geographic Data</div>
+        <div class="form-field">
+            <label for="nai">NAI (Named Area of Interest)</label>
+            <stargate-resizing-textarea textAreaId="nai" textAreaControlName="nai" maxLength="100"
+                                        [formGroup]="rfiForm"></stargate-resizing-textarea>
+        </div>
+        <div class="form-field">
+            <label for="country">Country</label>
+            <stargate-resizing-textarea textAreaId="country" textAreaControlName="country" maxLength="100"
+                                        [formGroup]="rfiForm"></stargate-resizing-textarea>
+        </div>
+        <div class="form-field">
+            <label for="city">City</label>
+            <stargate-resizing-textarea textAreaId="city" textAreaControlName="city" maxLength="100"
+                                        [formGroup]="rfiForm"></stargate-resizing-textarea>
+        </div>
+        <div class="form-field">
+            <label for="region">Region</label>
+            <stargate-resizing-textarea textAreaId="region" textAreaControlName="region" maxLength="100"
+                                        [formGroup]="rfiForm"></stargate-resizing-textarea>
+        </div>
+        <div id="basic-coordinates" class="form-field coordinates">
+
+            <target-popover (clearPopover)="showPopover = ''" [showPopoverMid]="showPopover === 'basic-coords'"
+                            icon="#basic-info-icon"></target-popover>
+
+            <label for="coordinates">Coordinates (1 vertex)</label>
+            <i id="basic-info-icon" class="icon_cursor material-icons info-icon" (click)="setPopover('basic-coords')">info_outline</i>
+            <stargate-resizing-textarea textAreaId="coordinates" textAreaControlName="coordinates"
+                                        [formGroup]="rfiForm" maxLength="100"
+                                        [textAreaClass]="rfiForm.get('coordinates').invalid ? 'invalid coords' : 'coords' ">
+            </stargate-resizing-textarea>
+            <div *ngIf="rfiForm.get('coordinates').getError('invalidCoordinates')" class="validation-error">
+                {{ invalidCoords }}
+            </div>
+            <div *ngIf="rfiForm.get('coordinates').getError('invalidBasicCoordinates')" class="validation-error">
+                {{ invalidBasicCoords }}
+            </div>
+        </div>
+    </div>
+
+    <div formArrayName="targets" class="targets" *ngFor="let target of rfiForm.get('targets').controls; let i = index">
+        <div [attr.data-aid]="'target-' + i" class="form-group_fields" [formGroupName]="i">
+            <div class="full-span">
+                <div class="target-header target">Target #{{i + 1}}</div>
+                <div class="menu-icon target-menu" (click)="openMenu(i)" [id]="'target-menu-' + i"
+                     *ngIf="rfiForm.enabled">
+                    <div *ngIf="showMenu === i" class="target-menu" (clickOutside)="closeMenu()"
+                         [delayClickOutsideInit]=true>
+                        <div (click)="deleteTarget(i)" [id]="'target-delete-' + i" class="delete">Delete</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-field full-span">
+                <label [for]="'target-name-' + i">Target Name</label>
+                <stargate-resizing-textarea textAreaId="target-name-{{i}}" textAreaControlName="name" maxLength="100"
+                                            [formGroup]="rfiForm.get('targets').get(i.toString())"></stargate-resizing-textarea>
+            </div>
+            <div class="form-field"
+                 [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+                <label [for]="'target-type=' + i">Target Type</label>
+                <select name="target-type" [id]="'target-type=' + i" formControlName="type">
+                    <option value="" disabled selected hidden></option>
+                    <option value="POINT">Point</option>
+                    <option value="AREA">Area</option>
+                    <option value="LOC">LOC</option>
+                    <option value="DSA">DSA</option>
+                </select>
+            </div>
+            <div class="form-field radius">
+                <div class="radius-title">
+                    <label [for]="'radius-' + i">Radius</label>
+                    <input [id]="'radius-' + i" class="radius-input" formControlName="radius"/>
+                </div>
+                <div class="radius-unit"
+                     [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+                    <label [for]="'radius-unit-' + i">&nbsp;</label>
+                    <select [id]="'radius-unit-' + i" formControlName="radiusUnit">
+                        <option value="NM">nm</option>
+                        <option value="KM">km</option>
+                    </select>
+                </div>
+            </div>
+            <div [id]="'target-coordinates-div-' + i" class="form-field full-span">
+                <target-popover (clearPopover)="showPopover = ''"
+                                [showPopoverRight]="showPopover === 'target-coordinates-' + i"
+                                [icon]="'#target-info-icon-' +i"></target-popover>
+                <label [for]="'target-coordinates-' + i">
+                    Target Coordinates (DSA and Area (Min. 3 vertices); LOC Coords (Min. of 2))
+                </label>
+                <div>
+                    <stargate-resizing-textarea textAreaId="target-coordinates-{{i}}" textAreaControlName="coordinates"
+                                                maxLength="255"
+                                                [textAreaClass]="target.invalid ? 'invalid coords' : 'coords'"
+                                                [formGroup]="rfiForm.get('targets').get(i.toString())"></stargate-resizing-textarea>
+                    <i [id]="'target-info-icon-' + i" class="icon_cursor material-icons info-icon"
+                       (click)="setPopover('target-coordinates-' + i)">info_outline</i>
+                </div>
+                <div *ngIf="target.errors?.invalidCoordinates" class="validation-error">
+                    {{ invalidCoords }}
+                </div>
+                <div *ngIf="target.errors?.invalidNumberOfCoordinates" class="validation-error">
+                    {{ invalidNumberOfCoords }}
+                </div>
+            </div>
+        </div>
+    </div>
+    <add-button *ngIf="rfiForm.enabled"  buttonText="Add a Target" (click)="addTarget()"></add-button>
+</form>

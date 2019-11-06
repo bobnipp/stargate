@@ -1,0 +1,41 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <soap:Body>
+        <ns2:getTargetResponse xmlns:ns2="http://PRISMCoreDataWS.coredataws.ws.prism.saic.com">
+            <return>
+                <success>true</success>
+                <prismTargetList>
+                    <key>3</key>
+                    <id>PDSDFAASDFSADF</id>
+                    <prismId>PDSDFAASDFSADF:PRISM</prismId>
+                    <name>SDFAASDFSADFA</name>
+                    <type>LOC</type>
+                    <dataInfo>
+                        <owner>PRISM</owner>
+                        <createdBy>RANDREWS (randrews)</createdBy>
+                        <createdOn>2018-10-19T11:15:34.000Z</createdOn>
+                        <lastModifiedBy>RANDREWS (randrews)</lastModifiedBy>
+                        <lastModifiedOn>2018-10-19T11:15:34.000Z</lastModifiedOn>
+                        <prismStatus>N</prismStatus>
+                    </dataInfo>
+                    <loc>
+                        <coordinates>
+                            <sequence>0</sequence>
+                            <latDouble>39.7285155</latDouble>
+                            <longDouble>-105.064953</longDouble>
+                        </coordinates>
+                        <coordinates>
+                            <sequence>1</sequence>
+                            <latDouble>39.7528597</latDouble>
+                            <longDouble>-104.9980869</longDouble>
+                        </coordinates>
+                        <coordinates>
+                            <sequence>2</sequence>
+                            <latDouble>39.7505742</latDouble>
+                            <longDouble>-104.9512242</longDouble>
+                        </coordinates>
+                    </loc>
+                </prismTargetList>
+            </return>
+        </ns2:getTargetResponse>
+    </soap:Body>
+</soap:Envelope>

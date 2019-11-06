@@ -1,0 +1,3 @@
+redis:
+  hostname: ${PRISM_CACHE_HOST}
+  port: ${PRISM_CACHE_PORT}

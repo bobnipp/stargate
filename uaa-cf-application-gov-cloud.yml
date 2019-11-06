@@ -1,0 +1,123 @@
+#Deploy UAA Server as Cloud Foundry Service
+---
+applications:
+- name: uaa
+  memory: 1024M
+  instances: 1
+  random-route: false
+  path: ../uaa/uaa/build/libs/cloudfoundry-identity-uaa-4.14.0.war
+  host: stargate-uaa
+  env:
+    UAA_URL: http://stargate-uaa.apps.vi2e.io
+    LOGIN_URL: http://stargate-uaa.apps.vi2e.io
+    JBP_CONFIG_SPRING_AUTO_RECONFIGURATION: '{enabled: false}'
+    UAA_CONFIG_YAML: |
+      spring_profiles: default,mysql
+      login:
+        serviceProviderKey: |
+          -----BEGIN RSA PRIVATE KEY-----
+          MIICXQIBAAKBgQDHtC5gUXxBKpEqZTLkNvFwNGnNIkggNOwOQVNbpO0WVHIivig5
+          L39WqS9u0hnA+O7MCA/KlrAR4bXaeVVhwfUPYBKIpaaTWFQR5cTR1UFZJL/OF9vA
+          fpOwznoD66DDCnQVpbCjtDYWX+x6imxn8HCYxhMol6ZnTbSsFW6VZjFMjQIDAQAB
+          AoGAVOj2Yvuigi6wJD99AO2fgF64sYCm/BKkX3dFEw0vxTPIh58kiRP554Xt5ges
+          7ZCqL9QpqrChUikO4kJ+nB8Uq2AvaZHbpCEUmbip06IlgdA440o0r0CPo1mgNxGu
+          lhiWRN43Lruzfh9qKPhleg2dvyFGQxy5Gk6KW/t8IS4x4r0CQQD/dceBA+Ndj3Xp
+          ubHfxqNz4GTOxndc/AXAowPGpge2zpgIc7f50t8OHhG6XhsfJ0wyQEEvodDhZPYX
+          kKBnXNHzAkEAyCA76vAwuxqAd3MObhiebniAU3SnPf2u4fdL1EOm92dyFs1JxyyL
+          gu/DsjPjx6tRtn4YAalxCzmAMXFSb1qHfwJBAM3qx3z0gGKbUEWtPHcP7BNsrnWK
+          vw6By7VC8bk/ffpaP2yYspS66Le9fzbFwoDzMVVUO/dELVZyBnhqSRHoXQcCQQCe
+          A2WL8S5o7Vn19rC0GVgu3ZJlUrwiZEVLQdlrticFPXaFrn3Md82ICww3jmURaKHS
+          N+l4lnMda79eSp3OMmq9AkA0p79BvYsLshUJJnvbk76pCjR28PK4dV1gSDUEqQMB
+          qy45ptdwJLqLJCeNoR0JUcDNIRhOCuOPND7pcMtX6hI/
+          -----END RSA PRIVATE KEY-----
+        serviceProviderKeyPassword: password
+        serviceProviderCertificate: |
+          -----BEGIN CERTIFICATE-----
+          MIIDSTCCArKgAwIBAgIBADANBgkqhkiG9w0BAQQFADB8MQswCQYDVQQGEwJhdzEO
+          MAwGA1UECBMFYXJ1YmExDjAMBgNVBAoTBWFydWJhMQ4wDAYDVQQHEwVhcnViYTEO
+          MAwGA1UECxMFYXJ1YmExDjAMBgNVBAMTBWFydWJhMR0wGwYJKoZIhvcNAQkBFg5h
+          cnViYUBhcnViYS5hcjAeFw0xNTExMjAyMjI2MjdaFw0xNjExMTkyMjI2MjdaMHwx
+          CzAJBgNVBAYTAmF3MQ4wDAYDVQQIEwVhcnViYTEOMAwGA1UEChMFYXJ1YmExDjAM
+          BgNVBAcTBWFydWJhMQ4wDAYDVQQLEwVhcnViYTEOMAwGA1UEAxMFYXJ1YmExHTAb
+          BgkqhkiG9w0BCQEWDmFydWJhQGFydWJhLmFyMIGfMA0GCSqGSIb3DQEBAQUAA4GN
+          ADCBiQKBgQDHtC5gUXxBKpEqZTLkNvFwNGnNIkggNOwOQVNbpO0WVHIivig5L39W
+          qS9u0hnA+O7MCA/KlrAR4bXaeVVhwfUPYBKIpaaTWFQR5cTR1UFZJL/OF9vAfpOw
+          znoD66DDCnQVpbCjtDYWX+x6imxn8HCYxhMol6ZnTbSsFW6VZjFMjQIDAQABo4Ha
+          MIHXMB0GA1UdDgQWBBTx0lDzjH/iOBnOSQaSEWQLx1syGDCBpwYDVR0jBIGfMIGc
+          gBTx0lDzjH/iOBnOSQaSEWQLx1syGKGBgKR+MHwxCzAJBgNVBAYTAmF3MQ4wDAYD
+          VQQIEwVhcnViYTEOMAwGA1UEChMFYXJ1YmExDjAMBgNVBAcTBWFydWJhMQ4wDAYD
+          VQQLEwVhcnViYTEOMAwGA1UEAxMFYXJ1YmExHTAbBgkqhkiG9w0BCQEWDmFydWJh
+          QGFydWJhLmFyggEAMAwGA1UdEwQFMAMBAf8wDQYJKoZIhvcNAQEEBQADgYEAYvBJ
+          0HOZbbHClXmGUjGs+GS+xC1FO/am2suCSYqNB9dyMXfOWiJ1+TLJk+o/YZt8vuxC
+          KdcZYgl4l/L6PxJ982SRhc83ZW2dkAZI4M0/Ud3oePe84k8jm3A7EvH5wi5hvCkK
+          RpuRBwn3Ei+jCRouxTbzKPsuCVB+1sNyxMTXzf0=
+          -----END CERTIFICATE-----
+      jwt:
+        token:
+          signing-key: |
+           -----BEGIN RSA PRIVATE KEY-----
+           MIIEpQIBAAKCAQEAxTcuVfC7IXHpAbalvQl44b0NO3Pa00XRqdfEg8bGdrGMC1oq
+           Ai9bGO8GijknkK8MTAlDuZ1PSmvp0U+mPvl1r41Bp3bu6Wt3pOoww9UTBYJUtW5S
+           CkcegOwNYLfuDXu8Rx1AgLS1bNxAVBXQ3obrlcYAU5h1wiIu2Qi4YGH3egxynM5u
+           xzYg7qDXQGDuMSCWf3Ceagrl6nukncFHY0ZgIAgOj9tNW8WY05S7vBHv8aaso0SG
+           eTVsJ7gfwZxvIQwJb4m8oJ9tHwHeNuULPrFc2t+47uZL/38U+HD5KuxrR3iobzBe
+           li2hBc0gqigGfTspENwWu2oHa8DP+hq9rVxn5QIDAQABAoIBAQCpDuiVm0uPHArW
+           ATCKoDgTqvBQ6rvHKK7WnbREEn3G+eRHRv+D5/x7n0tH6j7UdHpiI/7+eq+h6GgD
+           mfe1PDt6RejmGbosNofVwzwSY/FuY48iCHQjg1vOwIunQYS74jo/6/+DVWXA7/3l
+           Ft56I8aIGbfl8WfhB1SJkEQdu11eLRFkrarNaPMFoz7xLTh7VBzTFwHetpo+EZ4i
+           +xj4y5j6VGn9Ca9EaXQvKYFV9UVflFWoDmX/rjIICa6qaiPko+Es4e8SWytefIxl
+           oYfAWNc5fokbQtAiW+d1UmYd6sZ9gBZbdPAxvnc7zMtVCx8QGO2b3wFm38WCFrBd
+           jiiiYPqBAoGBAP3vRE0seni+WS4T+leQcDbMl1NNoYDDYAqbenbxAQBdqMu9dGee
+           PBf/HPc65jC+MUivd6Gib5aBOrHl6gGh6QoIdcfHdRt/JS5Kdx2XVzEnHlXks5XC
+           pMuEByWnFP6gNOdVbgXtockt4xdsr0kY/EiLad3keUrjEuoiKhpXZiTZAoGBAMbR
+           0NrZ1iOXug04YA42n2KsXFeSDCQK2z2c5EdS/ZsUbJ68E0ByfiUgYEnt+ZbASrJm
+           bjZ8rNsJEEXUuwU5i+xHZzyEG3leyqW+LavhtnmOzQ8BLRBwPBqIU8F3/WPB3VGI
+           0fyeDbT7mlCJSQn3oVULLQIA/CnCtqwP+haCs8PtAoGAQUvJMF8DjxDDNcoFUYbe
+           k/i/4LfRk56pj5CzSOpn64Qp51nsGMjjgvgipqAKmPYPDjWweWufbgAE68HHDmxn
+           1CCgyKJNRqjHEsQrJPzJeuYoMsYAN745SevFOrVf/KmNcP7Sr8uPEoAuKNPVruIx
+           3SWcL2aUmeER+AqY8PUQWuECgYEAqEa7vA/108g+u6PEgSMwQcbanW/KgNMDfyGE
+           gO24IoLl8HAE515AcFH3zXry7eoxDs/tZoadkwIX2NLVu/VZ/ZDtyuWRj2dwo1nU
+           tA7lb/syigmXx7sG0/og0bYqLD3QgYsJGAP6W/08PgAEZsBFt4IvBOwqgXoBPJ6F
+           MHpNhn0CgYEA5RmSKkG2lCtn2zSq/N932S3CyANiHyH+6ljpW6SzqGfIIIv9Xu7N
+           GjsYCj2XdJWSbZkBUOO+QCiVzwDMdKXP/ssb9yG2/X8iiloBhOYcQ/K8pM5Sa3a9
+           eMtFEcS3RwvAoZRL/EbJyRR+xXoZGeO7gMdHpuYb4+Y3lujMaqHsFAw=
+           -----END RSA PRIVATE KEY-----
+          verification-key: |
+           -----BEGIN PUBLIC KEY-----
+           MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxTcuVfC7IXHpAbalvQl4
+           4b0NO3Pa00XRqdfEg8bGdrGMC1oqAi9bGO8GijknkK8MTAlDuZ1PSmvp0U+mPvl1
+           r41Bp3bu6Wt3pOoww9UTBYJUtW5SCkcegOwNYLfuDXu8Rx1AgLS1bNxAVBXQ3obr
+           lcYAU5h1wiIu2Qi4YGH3egxynM5uxzYg7qDXQGDuMSCWf3Ceagrl6nukncFHY0Zg
+           IAgOj9tNW8WY05S7vBHv8aaso0SGeTVsJ7gfwZxvIQwJb4m8oJ9tHwHeNuULPrFc
+           2t+47uZL/38U+HD5KuxrR3iobzBeli2hBc0gqigGfTspENwWu2oHa8DP+hq9rVxn
+           5QIDAQAB
+           -----END PUBLIC KEY-----
+      zones:
+       internal:
+         hostnames:
+           - stargate-uaa.apps.vi2e.io
+      database:
+        url: jdbc:mysql://q-n3s3y1.q-g1056.bosh:3306/service_instance_db
+        username: 736c1a19573046ec8bf8dd53693f2298
+        password: dp0u2k70ppf02oo3
+        maxactive: 4
+        maxidle: 4
+        minidle: 1
+
+      LOGIN_SECRET: loginsecret
+      issuer:
+        uri: http://stargate-uaa.apps.vi2e.io
+
+      encryption:
+        active_key_label: stargate
+        encryption_keys:
+        - label: stargate
+          passphrase: stargatePasswordSHA512
+
+      uaa:
+        clients:
+          admin:
+            id: admin
+            secret: adminsecret
+            authorized-grant-types: client_credentials
+            authorities: clients.read,clients.write,clients.secret,uaa.admin,scim.read,scim.write,password.write

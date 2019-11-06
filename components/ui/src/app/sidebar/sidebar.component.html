@@ -1,0 +1,110 @@
+<div class="sidebar" [@slideInOut]>
+    <div class="sidebar-header">
+        <div class="sidebar-header_record">
+            <div>
+                <span>{{ headline }}</span><br/>
+                <div class="sidebar-header_record_id">
+                    <stargate-copy-button [textToCopy]="record.id">
+                        {{ idText }} ID #{{record.id}}
+                    </stargate-copy-button>
+                </div>
+            </div>
+            <ul class="sidebar_actions">
+                <li class="sidebar_action sidebar_action--menu submenu" [ngClass]="{active: showMoreMenu}"
+                    (click)="toggleMoreMenu()">
+                    <div class="more-wrapper">
+                        <ul *ngIf="showMoreMenu">
+                            <li class="submenu add-to-list" [ngClass]="{active: showMoreMenu && showAddToListMenu}">
+                                <a (click)="toggleAddToListMenu(); $event.stopPropagation()">Add to List</a>
+                                <div class="material-icons right-menu">chevron_right</div>
+                            </li>
+                            <li *ngIf="record.recordType === rfiType && record.id" class="submenu add-to-list delete-record">
+                                <a (click)="deleteRecord(); $event.stopPropagation()">Delete</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="add-to-list-wrapper">
+                        <ul *ngIf="showMoreMenu && showAddToListMenu">
+                            <li *ngFor="let list of lists">
+                                <a (click)="saveToList(list.name); $event.stopPropagation()">{{list.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li (click)="cancel()">
+                    <a (click)="cancel()" class="sidebar_action sidebar_action--close" id="close-sidebar"></a>
+                </li>
+            </ul>
+        </div>
+        <div [hidden]="errorList.length === 0" class="sidebar-header_error-collection">
+            <span class="error-collection_header">Unable to Save</span>
+            <ul>
+                <li *ngFor="let error of errorList">{{ error }}</li>
+            </ul>
+        </div>
+        <div>
+            <form [formGroup]="recordForm">
+                <div class="form-field">
+                    <stargate-resizing-textarea maxLength="100" [formGroup]="recordForm" textAreaId="title"
+                                                textAreaControlName="title"
+                                                textAreaPlaceholder="Untitled"
+                                                textAreaClass="title-input"></stargate-resizing-textarea>
+                    <div *ngIf="recordForm.get('title').invalid && submitted"
+                         class="invalid-message invalid-message_title">
+                        Please include a title - it's required
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="rfi-main-section-buttons">
+            <button type="button"
+                    [class]="activeRfiMainForm === 'Details' ? 'btn-rfi-main-section__active' : 'btn-rfi-main-section'"
+                    (click)="toggleMainForm('Details')">
+                Details
+            </button>
+            <button type="button" [disabled]="!record.id"
+                    [class]="activeRfiMainForm === 'Activity' ? 'btn-rfi-main-section__active' : 'btn-rfi-main-section'"
+                    (click)="toggleMainForm('Activity')">
+                Activity
+            </button>
+            <button type="button"
+                    [class]="activeRfiMainForm === 'History' ? 'btn-rfi-main-section__active' : 'btn-rfi-main-section'"
+                    (click)="toggleMainForm('History')">
+                History
+            </button>
+        </div>
+    </div>
+    <div class="sidebar_content">
+        <form [formGroup]="recordForm" (ngSubmit)="onSave()" id="rfiForm">
+            <stargate-sidebar-details
+                    *ngIf="activeRfiMainForm === 'Details'"
+                    [rfiForm]="recordForm"
+                    [submitted]="submitted"
+                    [record]="record">
+            </stargate-sidebar-details>
+            <stargate-sidebar-activity
+                    *ngIf="activeRfiMainForm === 'Activity'"
+                    [recordForm]="recordForm"
+                    [record]="record">
+            </stargate-sidebar-activity>
+
+            <stargate-sidebar-history
+                    [record]="record"
+                    *ngIf="activeRfiMainForm === 'History'">
+            </stargate-sidebar-history>
+        </form>
+    </div>
+    <div *ngIf="recordForm.enabled" class="sidebar-footer">
+        <button type="submit"
+                form="rfiForm"
+                class="btn-primary"
+                [disabled]="!recordForm.dirty">
+            Save
+        </button>
+        <button type="button"
+                class="btn-secondary sidebar_cancel"
+                (click)="cancel()">
+            Cancel
+        </button>
+    </div>
+</div>

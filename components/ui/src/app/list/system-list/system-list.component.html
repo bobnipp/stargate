@@ -1,0 +1,51 @@
+<div class="list-table" [attr.data-aid]="dataAid">
+    <div class="list-table_title">
+        {{ title }}
+        <div class="list-table_actions">
+            <i class="material-icons refresh" (click)="refresh()">refresh</i>
+            <i class="material-icons close-column" (click)="toggleList()">close</i>
+        </div>
+    </div>
+    <div class="results">
+        <div class="results_count">{{systemList.length}} RESULTS</div>
+        <div class="sort">
+            <div class="sort_title">
+                <span (click)="toggleShowSortOptions()">By: {{ selectedSort.name }} <i class="material-icons">expand_more</i></span>
+                <div *ngIf="showSortOptions" class="sort_options-container">
+                    <div class="sort-option" *ngFor="let option of sortOptions" (click)="updateSelectedSort(option.name)">
+                        <div>
+                            <i class="material-icons" [ngClass]="{'sort-option_icon-hidden': option.name !== selectedSort.name}">check</i>
+                        </div>
+                        <div (click)="updateSelectedSort(option.name)">
+                            {{ option.name }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="sort_direction" (click)="toggleSortDirection()">
+                <i class="material-icons">
+                    {{ sortIcon }}
+                </i>
+            </div>
+        </div>
+    </div>
+    <div class="list-table_items">
+        <div class="load" *ngIf="loading">
+            <div class="load-container">
+                <div class="loading">
+                    <div class="loading-bar">
+                        <div class="bar"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-container">
+                <p class="load-text">Loading {{ title }}</p>
+            </div>
+        </div>
+        <ng-container *ngIf="!loading">
+            <list-record-item-view *ngFor="let record of systemList"
+                                   [isLinkActive]="isActiveLink(record.id)"
+                                   [record]="record"></list-record-item-view>
+        </ng-container>
+    </div>
+</div>

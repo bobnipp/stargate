@@ -1,0 +1,11 @@
+uaa-base-url: http://${UAA_HOST}:8080/uaa
+
+prism-adapter:
+  host-name: 'http://${PRISM_ADAPTER_HOST}:8082/'
+
+
+spring:
+  datasource:
+    url: ${STARGATE_JDBC_URL}
+    username: ${STARGATE_DB_USERNAME}
+    password: ${STARGATE_DB_PASSWORD}

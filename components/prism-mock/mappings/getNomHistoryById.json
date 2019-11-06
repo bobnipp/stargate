@@ -1,0 +1,14 @@
+{
+  "id": "90eb45de-abf6-4056-8b91-3283ce83d4f5",
+  "request": {
+    "method": "GET",
+    "urlPattern": "/prism-webapp/rest/system/history/NOM/(.*)"
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "get.nom.history.byId.response.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

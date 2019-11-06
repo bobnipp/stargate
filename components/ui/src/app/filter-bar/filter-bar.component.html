@@ -1,0 +1,10 @@
+<div class="filter-bar">
+    <stargate-filter #filter [systemOptions]="selectedSystemOptions" [availableOptions]="statusOptions" filterName="statusList" defaultButtonText="Status"></stargate-filter>
+    <stargate-filter #filter [systemOptions]="selectedSystemOptions" [availableOptions]="priorityOptions" filterName="priorityList" defaultButtonText="Priority"></stargate-filter>
+    <stargate-filter-system #filter [availableOptions]="systemOptions" filterName="systemList" defaultButtonText="Components" (filterUpdate)="systemFilterUpdate($event)"></stargate-filter-system>
+    <stargate-filter #filter [systemOptions]="selectedSystemOptions" [availableOptions]="targetOptions" filterName="targetList" defaultButtonText="Target Type"></stargate-filter>
+    <stargate-filter #filter [systemOptions]="selectedSystemOptions" [availableOptions]="sensorOptions" filterName="sensorList" defaultButtonText="Sensor Type"></stargate-filter>
+    <stargate-filter-search #filter></stargate-filter-search>
+
+    <div class="filter-clear-all" *ngIf="hasFilters()" (click)="clearAllFilters()">Clear All</div>
+</div>

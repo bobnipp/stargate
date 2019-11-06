@@ -1,0 +1,7 @@
+CREATE TABLE imm_rfis (
+  id BIGINT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  title VARCHAR(100),
+  country VARCHAR(100),
+  latitude DECIMAL(13, 10),
+  longitude DECIMAL(13, 10)
+)

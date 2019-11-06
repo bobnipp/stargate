@@ -1,0 +1,8 @@
+prism:
+  mock: http://prism-mock-demo.apps.vi2e.io
+
+redis:
+  hostname: ${vcap.services.prism-cache.credentials.host}
+  port: ${vcap.services.prism-cache.credentials.port}
+  credentials:
+   password: ${vcap.services.prism-cache.credentials.password}

@@ -1,0 +1,6 @@
+CREATE TABLE tasks (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  rfi_id INT NOT NULL,
+  content VARCHAR(255) NOT NULL,
+  CONSTRAINT tasks_rfis_fk FOREIGN KEY (rfi_id) REFERENCES rfis (id)
+)

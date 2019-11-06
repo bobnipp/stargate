@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+tmux new-session -d -s stargate
+
+# start uaa
+tmux send-keys './scripts/createkeys.sh && cd ../uaa && UAA_CONFIG_URL=file://$PWD/../stargate/uaa_config.yml ./gradlew run' 'C-m'
+
+# start stargate frontend build
+tmux split-window -h
+tmux select-window -t stargate:1
+tmux send-keys 'cd components/ui && yarn build:watch' 'C-m'
+
+# start stargate
+tmux split-window -h
+tmux select-window -t stargate:2
+tmux send-keys '# Press ENTER once UAA is up to start stargate application' 'C-m'
+tmux send-keys './scripts/uaa-init-local.sh; ./gradlew bootrun'
+
+tmux split-window -h
+tmux send-keys 'mailcatcher' 'C-m'
+
+tmux select-window -t stargate:1
+
+tmux -2 attach-session -t stargate

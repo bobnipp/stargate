@@ -1,0 +1,24 @@
+{
+  "data": [
+    {
+      "editable": true,
+      "leaf": true,
+      "disabled": false,
+      "savable": true,
+      "clickable": true,
+      "selfLoad": true,
+      "expanded": false,
+      "iconCls": "prism-nom-icon",
+      "data": {
+        "recordId": "000000000001303PR7AWS",
+        "recordName": "1000",
+        "prismState": "A",
+        "type": "NOM",
+        "prismStatus": ""
+      },
+      "text": "1000(1000)",
+      "id": "0-000000000001303PR7AWS"
+    }
+  ],
+  "success": true
+}

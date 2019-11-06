@@ -1,0 +1,57 @@
+<form [formGroup]="activityForm" class="form-group" id="activity">
+    <div class="username">@{{currentUser.username}}</div>
+    <div class="progress">
+        <div class="progress_text">Upload - {{ progress }}% Complete <span *ngIf="progress === 100">- Waiting for request to complete</span></div>
+        <progress *ngIf="progress > 0" [value]="progress" max="100"></progress>
+    </div>
+    <div *ngIf="progress === 0" class="form-group_fields">
+        <div class="form-field form-field--textarea">
+            <stargate-resizing-textarea minRows="3" textAreaId="addComment"
+                                        [formGroup]="activityForm"
+                                        textAreaControlName="text"></stargate-resizing-textarea>
+        </div>
+        <div class="files-added" *ngFor="let attachment of activityForm.get('attachments').controls; let i of index">
+            <div class="icon"><i class="material-icons">insert_drive_file</i></div>
+            <div class="text">Filename - {{ attachment.get('filename').value }} <br/>
+                {{ attachment.get('fileSize').value }}
+            </div>
+            <div class="remove" (click)="removeFile(i)"></div>
+        </div>
+        <stargate-file-upload (fileAdd)="addFile($event)" (fileLoading)="fileLoading($event)"></stargate-file-upload>
+        <div class="form-field form-field--comment-post">
+            <button type="submit"
+                    (click)="createRecordActivity()"
+                    class="btn-primary"
+                    [disabled]="!activityForm.valid || isFileLoading">Post
+            </button>
+        </div>
+    </div>
+</form>
+
+<div class="rfi-activities">
+    <div *ngFor="let activity of record.activities" class="rfi-activity">
+        <div class="comment-header">
+            <div class="rfi-activity__username">@{{ activity.username }}</div>
+
+            <div class="menu-icon activities-menu" (click)="openMenu(activity.id)"
+                 [id]="'activity-menu-' + activity.id">
+                <div *ngIf="showMenu === activity.id" class="menu" (clickOutside)="closeMenu()"
+                     [delayClickOutsideInit]=true>
+                    <div (click)="deleteActivity(activity.id)" [id]="'activity-delete-' + activity.id" class="delete">
+                        Delete
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="rfi-activity__text">{{ activity.text }}</div>
+        <div class="rfi-activity__timestamp">
+            {{ formatTimestamp(activity.timestamp) }}
+        </div>
+        <div class="files-added attachment" *ngFor="let attachment of activity.attachments"
+             (click)="download(attachment)">
+            <div class="icon"><i class="material-icons">insert_drive_file</i></div>
+            <div class="text">Filename - {{ attachment.name }} <br/> {{ attachment.size }}</div>
+            <div class="download"><i class="material-icons">vertical_align_bottom</i></div>
+        </div>
+    </div>
+</div>

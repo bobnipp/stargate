@@ -1,0 +1,27 @@
+task test(dependsOn: 'downloadDependencies', type: Exec) {
+    commandLine(getArgs(['yarn', 'test', '--no-progress', '--no-watch', '--source-map=false']))
+}
+
+task build(type: Exec) {
+    commandLine(getArgs(['yarn', 'build']))
+}
+
+task buildProd(type: Exec) {
+    commandLine(getArgs(['yarn', 'build:prod']))
+}
+
+task buildTest(type: Exec) {
+    commandLine(getArgs(['yarn', 'build:test']))
+}
+
+task buildWatch(type: Exec) {
+    commandLine(getArgs(['yarn', 'build:watch']))
+}
+
+task downloadDependencies(type: Exec) {
+    commandLine(getArgs(['yarn']))
+}
+
+task clean(type: Delete) {
+    delete '../api/src/main/resources/static'
+}

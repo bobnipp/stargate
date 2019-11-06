@@ -1,0 +1,1068 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="PRISMCoreDataWS" targetNamespace="http://PRISMCoreDataWS.coredataws.ws.prism.saic.com"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                  xmlns:tns="http://PRISMCoreDataWS.coredataws.ws.prism.saic.com"
+                  xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+    <wsdl:types>
+        <xs:schema elementFormDefault="unqualified"
+                   targetNamespace="http://PRISMCoreDataWS.coredataws.ws.prism.saic.com" version="1.0"
+                   xmlns:tns="http://PRISMCoreDataWS.coredataws.ws.prism.saic.com"
+                   xmlns:xs="http://www.w3.org/2001/XMLSchema">
+            <xs:element name="getCR" type="tns:getCR"/>
+            <xs:element name="getCRResponse" type="tns:getCRResponse"/>
+            <xs:element name="getER" type="tns:getER"/>
+            <xs:element name="getERResponse" type="tns:getERResponse"/>
+            <xs:element name="getIP" type="tns:getIP"/>
+            <xs:element name="getIPResponse" type="tns:getIPResponse"/>
+            <xs:element name="getMission" type="tns:getMission"/>
+            <xs:element name="getMissionResponse" type="tns:getMissionResponse"/>
+            <xs:element name="getNOM" type="tns:getNOM"/>
+            <xs:element name="getNOMResponse" type="tns:getNOMResponse"/>
+            <xs:element name="getTarget" type="tns:getTarget"/>
+            <xs:element name="getTargetByID" type="tns:getTargetByID"/>
+            <xs:element name="getTargetByIDResponse" type="tns:getTargetByIDResponse"/>
+            <xs:element name="getTargetResponse" type="tns:getTargetResponse"/>
+            <xs:complexType name="getTargetByID">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismMultiDataRequestId"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismMultiDataRequestId">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismRequest">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="idList" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismRequest">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="userID" type="xs:string"/>
+                    <xs:element minOccurs="0" name="password" type="xs:string"/>
+                    <xs:element minOccurs="0" name="databaseHost" type="xs:string"/>
+                    <xs:element minOccurs="0" name="databaseSID" type="xs:string"/>
+                    <xs:element minOccurs="0" name="resultSetSize" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getTargetByIDResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismTargetResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismTargetResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="prismTargetList" type="tns:prismTarget"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismResponse">
+                <xs:sequence>
+                    <xs:element name="success" type="xs:boolean"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="errorMessages" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismTarget">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="type" type="tns:prismTargetType"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="countryCodeList" type="tns:prismCountryCode"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="geoRegionList" type="tns:prismGeoRegion"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                    <xs:element minOccurs="0" name="point" type="tns:prismPoint"/>
+                    <xs:element minOccurs="0" name="dsa" type="tns:prismdsa"/>
+                    <xs:element minOccurs="0" name="loc" type="tns:prismloc"/>
+                    <xs:element minOccurs="0" name="rwac" type="tns:prismrwac"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismCountryCode">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element minOccurs="0" name="code" type="xs:string"/>
+                    <xs:element minOccurs="0" name="trigraph" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismDataInfo">
+                <xs:sequence>
+                    <xs:element name="owner" type="xs:string"/>
+                    <xs:element name="createdBy" type="xs:string"/>
+                    <xs:element name="createdOn" type="xs:dateTime"/>
+                    <xs:element name="lastModifiedBy" type="xs:string"/>
+                    <xs:element name="lastModifiedOn" type="xs:dateTime"/>
+                    <xs:element name="prismStatus" type="xs:string"/>
+                    <xs:element minOccurs="0" name="prismState" type="tns:prismState"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismGeoRegion">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismPoint">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="suffix" type="xs:string"/>
+                    <xs:element name="benum" type="xs:string"/>
+                    <xs:element minOccurs="0" name="kai" type="xs:string"/>
+                    <xs:element name="primaryFlag" type="xs:string"/>
+                    <xs:element minOccurs="0" name="idhs" type="tns:prismidhs"/>
+                    <xs:element minOccurs="0" name="cmxCat" type="tns:prismcmxcat"/>
+                    <xs:element name="geoCoord" type="tns:prismCoord"/>
+                    <xs:element name="minAxis" type="xs:double"/>
+                    <xs:element name="majAxis" type="xs:double"/>
+                    <xs:element name="minMajAngle" type="xs:double"/>
+                    <xs:element minOccurs="0" name="tPointStart" type="xs:date"/>
+                    <xs:element minOccurs="0" name="tPointStop" type="xs:date"/>
+                    <xs:element minOccurs="0" name="tPointGeo" type="tns:prismCoord"/>
+                    <xs:element minOccurs="0" name="tPointMinAxis" type="xs:double"/>
+                    <xs:element minOccurs="0" name="tPointMajAxis" type="xs:double"/>
+                    <xs:element minOccurs="0" name="tPointMinMajAngle" type="xs:double"/>
+                    <xs:element minOccurs="0" name="mrl" type="xs:string"/>
+                    <xs:element minOccurs="0" name="mtf" type="xs:string"/>
+                    <xs:element minOccurs="0" name="iPointElevation" type="xs:double"/>
+                    <xs:element minOccurs="0" name="iPointMinAxis" type="xs:double"/>
+                    <xs:element minOccurs="0" name="iPointMajAxis" type="xs:double"/>
+                    <xs:element minOccurs="0" name="iPointMinMajAngle" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismidhs">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcmxcat">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismCoord">
+                <xs:sequence>
+                    <xs:element name="sequence" type="xs:int"/>
+                    <xs:element name="latDouble" type="xs:double"/>
+                    <xs:element name="longDouble" type="xs:double"/>
+                    <xs:element minOccurs="0" name="elevation" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismdsa">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="size" type="xs:double"/>
+                    <xs:element maxOccurs="unbounded" name="coordinates" type="tns:prismCoord"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismloc">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" name="coordinates" type="tns:prismCoord"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismrwac">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="suffix" type="xs:string"/>
+                    <xs:element minOccurs="0" name="idhs" type="tns:prismidhs"/>
+                    <xs:element name="lowerLeftGeo" type="tns:prismCoord"/>
+                    <xs:element name="upperRightGeo" type="tns:prismCoord"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getTarget">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismMultiDataRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismMultiDataRequest">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismRequest">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="keyList" type="xs:string"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="getTargetResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismTargetResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getER">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismMultiDataRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getERResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismerResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismerResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="prismERList" type="tns:prismer"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismer">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="origSiteId" type="xs:string"/>
+                    <xs:element minOccurs="0" name="adHocFlag" type="tns:prismStandingAdhocFlag"/>
+                    <xs:element minOccurs="0" name="eei" type="tns:prismeei"/>
+                    <xs:element name="startDate" type="xs:date"/>
+                    <xs:element name="stopDate" type="xs:date"/>
+                    <xs:element name="priority" type="xs:int"/>
+                    <xs:element minOccurs="0" name="requirement" type="tns:prismerExploitationRqmnt"/>
+                    <xs:element minOccurs="0" name="phaseExploitation" type="tns:prismerExploitationPhase"/>
+                    <xs:element name="type" type="tns:prismRequirementType"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="countryCodeList" type="tns:prismCountryCode"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="geoRegionList" type="tns:prismGeoRegion"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ipList" type="tns:prismipShort"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="producerList" type="tns:prismProducer"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="reportList" type="tns:prismReport"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="targetList" type="tns:prismTargetShort"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                    <xs:element name="respOrg" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismeei">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="key" type="xs:string"/>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element minOccurs="0" name="text" type="xs:string"/>
+                    <xs:element minOccurs="0" name="respOrg" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismipShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismProducer">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismReport">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="period" type="tns:prismReportPeriod"/>
+                    <xs:element name="product" type="tns:prismReportProduct"/>
+                    <xs:element name="firstDueDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismReportPeriod">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismReportProduct">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismTargetShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                    <xs:element name="type" type="tns:prismTargetType"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getIP">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismMultiDataRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getIPResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismipResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismipResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="prismIPList" type="tns:prismip"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismip">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="priority" type="xs:int"/>
+                    <xs:element minOccurs="0" name="category" type="xs:string"/>
+                    <xs:element minOccurs="0" name="subCategory" type="xs:string"/>
+                    <xs:element minOccurs="0" name="countryCode" type="tns:prismCountryCode"/>
+                    <xs:element minOccurs="0" name="geoRegion" type="tns:prismGeoRegion"/>
+                    <xs:element name="respOrg" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getMission">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismMultiDataRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getMissionResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismMissionResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismMissionResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="prismMissionList" type="tns:prismMission"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismMission">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="localId" type="xs:string"/>
+                    <xs:element name="track" type="tns:prismTrack"/>
+                    <xs:element name="respOrg" type="xs:string"/>
+                    <xs:element name="platform" type="tns:prismPlatform"/>
+                    <xs:element name="status" type="tns:prismMissionStatus"/>
+                    <xs:element name="statusDate" type="xs:date"/>
+                    <xs:element maxOccurs="unbounded" name="sensorList" type="tns:prismMissionSensor"/>
+                    <xs:element minOccurs="0" name="riskCapabilities" type="tns:prismRiskCapability"/>
+                    <xs:element minOccurs="0" name="collectionProbability" type="tns:prismCollectionProbability"/>
+                    <xs:element minOccurs="0" name="riskIntention" type="tns:prismRiskIntention"/>
+                    <xs:element minOccurs="0" name="politicalSensitivity" type="tns:prismPoliticalSensitivity"/>
+                    <xs:element minOccurs="0" name="anticipatedGain" type="tns:prismAnticipatedGain"/>
+                    <xs:element minOccurs="0" name="strategicInfluence" type="tns:prismStrategicInfluence"/>
+                    <xs:element minOccurs="0" name="plannedTakeOffBase" type="tns:prismBase"/>
+                    <xs:element minOccurs="0" name="plannedTakeOffDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="plannedTakeOffTime" type="xs:time"/>
+                    <xs:element minOccurs="0" name="actualTakeOffBase" type="tns:prismBase"/>
+                    <xs:element minOccurs="0" name="actualTakeOffDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="actualTakeOffTime" type="xs:time"/>
+                    <xs:element minOccurs="0" name="plannedLandingBase" type="tns:prismBase"/>
+                    <xs:element minOccurs="0" name="plannedLandingDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="plannedLandingTime" type="xs:time"/>
+                    <xs:element minOccurs="0" name="actualLandingBase" type="tns:prismBase"/>
+                    <xs:element minOccurs="0" name="actualLandingDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="actualLandingTime" type="xs:time"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                    <xs:element minOccurs="0" name="standingMission" type="tns:prismStandingMission"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="onOffStationOffsetList"
+                                type="tns:prismOnOffStationOffset"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismTrack">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element minOccurs="0" name="aircraftOrbit" type="xs:string"/>
+                    <xs:element minOccurs="0" name="area" type="xs:string"/>
+                    <xs:element minOccurs="0" name="availableDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="aircraftRoute" type="xs:string"/>
+                    <xs:element minOccurs="0" name="sro" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="nato" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="trackCoords" type="tns:prismCoord"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="aoiIDList" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismPlatform">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="respOrg" type="xs:string"/>
+                    <xs:element name="platformTypeName" type="xs:string"/>
+                    <xs:element name="platformStatus" type="tns:prismPlatformStatus"/>
+                    <xs:element minOccurs="0" name="comments" type="xs:string"/>
+                    <xs:element name="effectiveDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="estimatedAvailableDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismMissionSensor">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="sensor" type="tns:prismSensor"/>
+                    <xs:element name="ped" type="xs:int"/>
+                    <xs:element name="maxSlots" type="xs:int"/>
+                    <xs:element name="adHoc" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" name="taskingAuthorityList" type="tns:prismTaskingAuthority"/>
+                    <xs:element minOccurs="0" name="minRange" type="xs:double"/>
+                    <xs:element minOccurs="0" name="maxRange" type="xs:double"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="producerList" type="tns:prismProducer"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="dgsList" type="tns:prismdgs"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismSensor">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="ped" type="xs:int"/>
+                    <xs:element minOccurs="0" name="adHoc" type="xs:int"/>
+                    <xs:element minOccurs="0" name="slots" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="sensorTypeTypes" type="xs:string"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="sensorModes" type="tns:prismSensorMode"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismSensorMode">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="predNiirs" type="xs:double"/>
+                    <xs:element minOccurs="0" name="defaulMode" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismTaskingAuthority">
+                <xs:sequence>
+                    <xs:element name="respOrg" type="xs:string"/>
+                    <xs:element name="percentAllocated" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismdgs">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismRiskCapability">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="risks" type="xs:int"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismCollectionProbability">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="cp" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismRiskIntention">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="ri" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismPoliticalSensitivity">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="ps" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismAnticipatedGain">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="gain" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismStrategicInfluence">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="si" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismBase">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismStandingMission">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="respOrg" type="xs:string"/>
+                    <xs:element name="programCode" type="tns:prismProgram"/>
+                    <xs:element maxOccurs="unbounded" name="trackList" type="tns:prismTrack"/>
+                    <xs:element maxOccurs="unbounded" name="platformList" type="tns:prismPlatform"/>
+                    <xs:element minOccurs="0" name="primaryPurpose" type="xs:string"/>
+                    <xs:element minOccurs="0" name="secondaryPurpose" type="xs:string"/>
+                    <xs:element minOccurs="0" name="riskCapabilities" type="tns:prismRiskCapability"/>
+                    <xs:element minOccurs="0" name="collectionProbability" type="tns:prismCollectionProbability"/>
+                    <xs:element minOccurs="0" name="riskIntention" type="tns:prismRiskIntention"/>
+                    <xs:element minOccurs="0" name="politicalSensitivity" type="tns:prismPoliticalSensitivity"/>
+                    <xs:element minOccurs="0" name="anticipatedGain" type="tns:prismAnticipatedGain"/>
+                    <xs:element minOccurs="0" name="strategicInfluence" type="tns:prismStrategicInfluence"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismProgram">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="code" type="xs:string"/>
+                    <xs:element minOccurs="0" name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismOnOffStationOffset">
+                <xs:sequence>
+                    <xs:element name="onStationOffset" type="xs:int"/>
+                    <xs:element name="offStationOffset" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getCR">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismMultiDataRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getCRResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismcrResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcrResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="prismCRList" type="tns:prismcr"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismcr">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="priority" type="xs:int"/>
+                    <xs:element name="startDate" type="xs:date"/>
+                    <xs:element name="stopDate" type="xs:date"/>
+                    <xs:element minOccurs="0" name="adHocFlag" type="tns:prismStandingAdhocFlag"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="earliestImageTime" type="xs:time"/>
+                    <xs:element minOccurs="0" name="latestImageTime" type="xs:time"/>
+                    <xs:element minOccurs="0" name="period" type="xs:int"/>
+                    <xs:element minOccurs="0" name="nightPriority" type="xs:int"/>
+                    <xs:element minOccurs="0" name="percentCoverage" type="xs:int"/>
+                    <xs:element minOccurs="0" name="strategy" type="xs:string"/>
+                    <xs:element minOccurs="0" name="type" type="tns:prismRequirementType"/>
+                    <xs:element minOccurs="0" name="imagesPerPeriod" type="xs:int"/>
+                    <xs:element minOccurs="0" name="tgtType" type="tns:prismTargetType"/>
+                    <xs:element minOccurs="0" name="considerForAllocation" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="masintFlag" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="masintMinAzDev" type="xs:double"/>
+                    <xs:element minOccurs="0" name="masintMaxAzDev" type="xs:double"/>
+                    <xs:element minOccurs="0" name="masintMinElevDevAngle" type="xs:double"/>
+                    <xs:element minOccurs="0" name="masintMaxElevDevAngle" type="xs:double"/>
+                    <xs:element minOccurs="0" name="masintReqComplexData" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="periodType" type="tns:prismcrPeriodType"/>
+                    <xs:element minOccurs="0" name="minCci" type="xs:int"/>
+                    <xs:element minOccurs="0" name="maxCci" type="xs:int"/>
+                    <xs:element minOccurs="0" name="masintType" type="tns:prismMasintType"/>
+                    <xs:element minOccurs="0" name="surveillance" type="tns:prismcrSurveillance"/>
+                    <xs:element minOccurs="0" name="recurrence" type="tns:prismcrRecurrence"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="countryCodeList" type="tns:prismCountryCode"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="geoRegionList" type="tns:prismGeoRegion"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ipList" type="tns:prismipShort"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="sensorList" type="tns:prismcrSensor"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="erList" type="tns:prismerShort"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="targetList" type="tns:prismcrTarget"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                    <xs:element name="respOrg" type="xs:string"/>
+                    <xs:element minOccurs="0" name="rmsSpecific" type="tns:prismcrRMSSpecific"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismMasintType">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="type" type="xs:string"/>
+                    <xs:element name="description" type="xs:string"/>
+                    <xs:element name="requiresComplexData" type="xs:boolean"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcrSurveillance">
+                <xs:sequence>
+                    <xs:element name="survType" type="tns:prismcrSurveillanceType"/>
+                    <xs:element minOccurs="0" name="revisitFreq" type="xs:int"/>
+                    <xs:element minOccurs="0" name="dwellTime" type="xs:int"/>
+                    <xs:element minOccurs="0" name="cvgPeriod" type="xs:int"/>
+                    <xs:element name="cvgReqd" type="xs:int"/>
+                    <xs:element minOccurs="0" name="pursuitFlag" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="instructions" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcrRecurrence">
+                <xs:sequence>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="daysOfWeek" type="tns:prismDaysOfWeek"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="daysOfMonth" type="xs:int"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="arbitraryDates" type="xs:date"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcrSensor">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="desiredNiirs" type="xs:double"/>
+                    <xs:element name="predNiirs" type="xs:double"/>
+                    <xs:element minOccurs="0" name="startAzimuth" type="xs:double"/>
+                    <xs:element minOccurs="0" name="stopAzimuth" type="xs:double"/>
+                    <xs:element minOccurs="0" name="startElevation" type="xs:double"/>
+                    <xs:element minOccurs="0" name="stopElevation" type="xs:double"/>
+                    <xs:element minOccurs="0" name="minSunAzimuth" type="xs:double"/>
+                    <xs:element minOccurs="0" name="maxSunAzimuth" type="xs:double"/>
+                    <xs:element minOccurs="0" name="sensor" type="tns:prismSensor"/>
+                    <xs:element minOccurs="0" name="sensorType" type="tns:prismSensorType"/>
+                    <xs:element minOccurs="0" name="sensorMode" type="tns:prismSensorMode"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismSensorType">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="type" type="xs:string"/>
+                    <xs:element minOccurs="0" name="description" type="xs:string"/>
+                    <xs:element minOccurs="0" name="discipline" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismerShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcrTarget">
+                <xs:sequence>
+                    <xs:element name="crxtgtKey" type="xs:string"/>
+                    <xs:element name="target" type="tns:prismTargetShort"/>
+                    <xs:element minOccurs="0" name="lookAtCoord" type="tns:prismCoord"/>
+                    <xs:element minOccurs="0" name="lookAtMinAxis" type="xs:double"/>
+                    <xs:element minOccurs="0" name="lookAtMajAxis" type="xs:double"/>
+                    <xs:element minOccurs="0" name="lookAtMinMajAngle" type="xs:double"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcrRMSSpecific">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="minAge" type="xs:int"/>
+                    <xs:element minOccurs="0" name="maxAge" type="xs:int"/>
+                    <xs:element minOccurs="0" name="cFlag" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="weatherThreshold" type="xs:int"/>
+                    <xs:element minOccurs="0" name="decompImage" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="collOverrideFlag" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="radiometricFlag" type="tns:prismYesNoFlag"/>
+                    <xs:element minOccurs="0" name="numReqrdCollections" type="xs:int"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getNOM">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="arg0" type="tns:prismMultiDataRequest"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="getNOMResponse">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="return" type="tns:prismNomResponse"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismNomResponse">
+                <xs:complexContent>
+                    <xs:extension base="tns:prismResponse">
+                        <xs:sequence>
+                            <xs:element maxOccurs="unbounded" name="prismNomList" type="tns:prismNom"/>
+                        </xs:sequence>
+                    </xs:extension>
+                </xs:complexContent>
+            </xs:complexType>
+            <xs:complexType name="prismNom">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element name="precedence" type="xs:string"/>
+                    <xs:element minOccurs="0" name="justification" type="xs:string"/>
+                    <xs:element minOccurs="0" name="comments" type="xs:string"/>
+                    <xs:element minOccurs="0" name="nomImint" type="tns:prismNomIMINT"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismNomIMINT">
+                <xs:sequence>
+                    <xs:element name="respOrg" type="xs:string"/>
+                    <xs:element name="status" type="tns:prismNomStatus"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="crList" type="tns:prismcrShort"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="erList" type="tns:prismerShort"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="targetList" type="tns:prismTargetShort"/>
+                    <xs:element maxOccurs="unbounded" minOccurs="0" name="ipList" type="tns:prismipShort"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:complexType name="prismcrShort">
+                <xs:sequence>
+                    <xs:element name="key" type="xs:string"/>
+                    <xs:element name="id" type="xs:string"/>
+                    <xs:element name="prismId" type="xs:string"/>
+                    <xs:element name="name" type="xs:string"/>
+                    <xs:element minOccurs="0" name="dataInfo" type="tns:prismDataInfo"/>
+                </xs:sequence>
+            </xs:complexType>
+            <xs:simpleType name="prismTargetType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="DSA"/>
+                    <xs:enumeration value="LOC"/>
+                    <xs:enumeration value="POINT"/>
+                    <xs:enumeration value="RWAC"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismState">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ACTIVE"/>
+                    <xs:enumeration value="INACTIVE"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismStandingAdhocFlag">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="AD_HOC"/>
+                    <xs:enumeration value="STANDING"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismerExploitationRqmnt">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="DEPARTMENTAL"/>
+                    <xs:enumeration value="NATIONAL"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismerExploitationPhase">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="P"/>
+                    <xs:enumeration value="ONE"/>
+                    <xs:enumeration value="TWO"/>
+                    <xs:enumeration value="THREE"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismRequirementType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="ACTIVE"/>
+                    <xs:enumeration value="CONTINGENCY"/>
+                    <xs:enumeration value="REPORT"/>
+                    <xs:enumeration value="INACTIVE"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismYesNoFlag">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="YES"/>
+                    <xs:enumeration value="NO"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismPlatformStatus">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="NOMINAL"/>
+                    <xs:enumeration value="CONVENTIONAL_ANTI_AIRCRAFT_ATTACK"/>
+                    <xs:enumeration value="AIR_COLLISION"/>
+                    <xs:enumeration value="ATTACKED_BY_ENEMY_AIRCRAFT"/>
+                    <xs:enumeration value="ADVISORY_WARNING"/>
+                    <xs:enumeration value="COUNTRY_CLEARANCE_DIFFICULTIES"/>
+                    <xs:enumeration value="CONTROL_MALFUNCTION"/>
+                    <xs:enumeration value="CRASHED"/>
+                    <xs:enumeration value="ELECTRICAL_SYSTEM_FAILURE"/>
+                    <xs:enumeration value="ENGINE_MALFUNCTION"/>
+                    <xs:enumeration value="INSUFFICIENT_FUEL"/>
+                    <xs:enumeration value="ATTACKED_ON_THE_GROUND"/>
+                    <xs:enumeration value="ORDERED_ACTION_NOT_BY_JCS"/>
+                    <xs:enumeration value="ORDERED_BY_JCS"/>
+                    <xs:enumeration value="LANDING_ACCIDENT"/>
+                    <xs:enumeration value="MAINTENANCE_CAUSE"/>
+                    <xs:enumeration value="OPERATIONS"/>
+                    <xs:enumeration value="OTHER"/>
+                    <xs:enumeration value="PILOT_ERROR"/>
+                    <xs:enumeration value="SMALL_ARMS_ATTACK"/>
+                    <xs:enumeration value="STRUCTURAL_FAILURE"/>
+                    <xs:enumeration value="SAM_ATTACK"/>
+                    <xs:enumeration value="TAKE_OFF_ACCIDENT"/>
+                    <xs:enumeration value="UNKNOWN"/>
+                    <xs:enumeration value="UNUSED_CONTINGENCY_MISSION"/>
+                    <xs:enumeration value="WEATHER"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismMissionStatus">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="SCHEDULED"/>
+                    <xs:enumeration value="COMPLETED_AS_SCHEDULED"/>
+                    <xs:enumeration value="COMPLETED_DEVIATION"/>
+                    <xs:enumeration value="ABORTED_COMPLETE"/>
+                    <xs:enumeration value="ABORTED_INCOMPLETE"/>
+                    <xs:enumeration value="CANCELED"/>
+                    <xs:enumeration value="DELAYED"/>
+                    <xs:enumeration value="DELAYED_INDEFINITELY"/>
+                    <xs:enumeration value="RESCHEDULED"/>
+                    <xs:enumeration value="ON_LINK"/>
+                    <xs:enumeration value="OFF_LINK"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismcrPeriodType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="FIRST_COLLECT"/>
+                    <xs:enumeration value="FIXED_STR"/>
+                    <xs:enumeration value="LAST_COLLECT_STR"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismcrSurveillanceType">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="EVENT_DRIVEN"/>
+                    <xs:enumeration value="PERSISTENT"/>
+                    <xs:enumeration value="RAPID_REVISIT"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismDaysOfWeek">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="SUNDAY"/>
+                    <xs:enumeration value="MONDAY"/>
+                    <xs:enumeration value="TUESDAY"/>
+                    <xs:enumeration value="WEDNESDAY"/>
+                    <xs:enumeration value="THURSDAY"/>
+                    <xs:enumeration value="FRIDAY"/>
+                    <xs:enumeration value="SATURDAY"/>
+                </xs:restriction>
+            </xs:simpleType>
+            <xs:simpleType name="prismNomStatus">
+                <xs:restriction base="xs:string">
+                    <xs:enumeration value="APPROVE"/>
+                    <xs:enumeration value="HOLD"/>
+                    <xs:enumeration value="REWORK"/>
+                    <xs:enumeration value="SUBMITTED"/>
+                    <xs:enumeration value="VOTE"/>
+                    <xs:enumeration value="WORKING"/>
+                    <xs:enumeration value="TEMPLATE"/>
+                    <xs:enumeration value="FORWARD"/>
+                    <xs:enumeration value="SEND_TO_NSRP"/>
+                    <xs:enumeration value="SEND_TO_RMS"/>
+                </xs:restriction>
+            </xs:simpleType>
+        </xs:schema>
+    </wsdl:types>
+    <wsdl:message name="getNOMResponse">
+        <wsdl:part element="tns:getNOMResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getER">
+        <wsdl:part element="tns:getER" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMission">
+        <wsdl:part element="tns:getMission" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getERResponse">
+        <wsdl:part element="tns:getERResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getIPResponse">
+        <wsdl:part element="tns:getIPResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getMissionResponse">
+        <wsdl:part element="tns:getMissionResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getTargetByID">
+        <wsdl:part element="tns:getTargetByID" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getCR">
+        <wsdl:part element="tns:getCR" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getNOM">
+        <wsdl:part element="tns:getNOM" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getTarget">
+        <wsdl:part element="tns:getTarget" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getTargetResponse">
+        <wsdl:part element="tns:getTargetResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getIP">
+        <wsdl:part element="tns:getIP" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getTargetByIDResponse">
+        <wsdl:part element="tns:getTargetByIDResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="getCRResponse">
+        <wsdl:part element="tns:getCRResponse" name="parameters">
+        </wsdl:part>
+    </wsdl:message>
+    <wsdl:portType name="PRISMCoreDataWSEndPoint">
+        <wsdl:operation name="getTargetByID">
+            <wsdl:input message="tns:getTargetByID" name="getTargetByID">
+            </wsdl:input>
+            <wsdl:output message="tns:getTargetByIDResponse" name="getTargetByIDResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getTarget">
+            <wsdl:input message="tns:getTarget" name="getTarget">
+            </wsdl:input>
+            <wsdl:output message="tns:getTargetResponse" name="getTargetResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getER">
+            <wsdl:input message="tns:getER" name="getER">
+            </wsdl:input>
+            <wsdl:output message="tns:getERResponse" name="getERResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getIP">
+            <wsdl:input message="tns:getIP" name="getIP">
+            </wsdl:input>
+            <wsdl:output message="tns:getIPResponse" name="getIPResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMission">
+            <wsdl:input message="tns:getMission" name="getMission">
+            </wsdl:input>
+            <wsdl:output message="tns:getMissionResponse" name="getMissionResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCR">
+            <wsdl:input message="tns:getCR" name="getCR">
+            </wsdl:input>
+            <wsdl:output message="tns:getCRResponse" name="getCRResponse">
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNOM">
+            <wsdl:input message="tns:getNOM" name="getNOM">
+            </wsdl:input>
+            <wsdl:output message="tns:getNOMResponse" name="getNOMResponse">
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
+    <wsdl:binding name="PRISMCoreDataWSSoapBinding" type="tns:PRISMCoreDataWSEndPoint">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+        <wsdl:operation name="getTargetByID">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getTargetByID">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getTargetByIDResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getTarget">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getTarget">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getTargetResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getER">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getER">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getERResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getIP">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getIP">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getIPResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getMission">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getMission">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getMissionResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getCR">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getCR">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getCRResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+        <wsdl:operation name="getNOM">
+            <soap:operation soapAction="" style="document"/>
+            <wsdl:input name="getNOM">
+                <soap:body use="literal"/>
+            </wsdl:input>
+            <wsdl:output name="getNOMResponse">
+                <soap:body use="literal"/>
+            </wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
+    <wsdl:service name="PRISMCoreDataWS">
+        <wsdl:port binding="tns:PRISMCoreDataWSSoapBinding" name="PRISMCoreDataWSEndPointPort">
+            <soap:address location="http://localhost:5050//PRISMCoreDataWS"/>
+        </wsdl:port>
+    </wsdl:service>
+</wsdl:definitions>

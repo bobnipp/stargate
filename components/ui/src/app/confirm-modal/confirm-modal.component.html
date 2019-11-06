@@ -1,0 +1,18 @@
+<div class="stargate-modal-background" *ngIf="show"></div>
+
+<div class="stargate-modal" *ngIf="show">
+    <div class="stargate-modal_header">{{ val.title ? val.title : 'Abandon Changes' }}</div>
+    <div>
+        <div class="stargate-modal_message">
+            {{ val.message ? val.message : 'You have unsaved changes. Are you sure you want to abandon?' }}
+        </div>
+        <div>
+            <button class="btn-primary" (click)="ok()">
+                {{ val.okButtonText ? val.okButtonText : 'YES, ABANDON' }}
+            </button>
+            <button class="btn-secondary" (click)="cancel()">
+                {{ val.cancelButtonText ? val.cancelButtonText : 'NO, GO BACK' }}
+            </button>
+        </div>
+    </div>
+</div>

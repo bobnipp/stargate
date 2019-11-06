@@ -1,0 +1,60 @@
+<form [formGroup]="rfiForm">
+    <div class="form-group_fields">
+        <stargate-date-picker [formGroup]="rfiForm" attributeName="collectionStartDate" displayName="Start Date"></stargate-date-picker>
+        <stargate-date-picker [formGroup]="rfiForm" attributeName="collectionEndDate" displayName="End Date"></stargate-date-picker>
+
+        <div class="form-field">
+            <label for="collectionTerm">Collection Term</label>
+            <stargate-resizing-textarea id="collectionTerm" textAreaId="collectionTerm" [formGroup]="rfiForm" maxLength="100"
+                                        textAreaControlName="collectionTerm"></stargate-resizing-textarea>
+        </div>
+
+        <div class="form-field">
+            <label for="collectionType">Collection Type</label>
+            <stargate-resizing-textarea id="collectionType" textAreaId="collectionType" [formGroup]="rfiForm" maxLength="100"
+                                        textAreaControlName="collectionType"></stargate-resizing-textarea>
+        </div>
+
+        <div class="form-field" [ngClass]="{'form-field--select': rfiForm.enabled, 'form-field--select-disabled': rfiForm.disabled}">
+            <label for="assignedTeam">Assigned Team</label>
+            <select id="assignedTeam" formControlName="assignedTeamId">
+                <option value="null" selected></option>
+                <option *ngFor="let assignedTeamOption of recordSelectOptions.assignedTeamOptions"
+                        [value]="assignedTeamOption.id">{{assignedTeamOption.value}}
+                </option>
+            </select>
+        </div>
+
+        <div class="form-field">
+            <label for="assignee">Assignee</label>
+            <stargate-resizing-textarea textAreaId="assignee" [formGroup]="rfiForm" textAreaControlName="assignee" maxLength="100"></stargate-resizing-textarea>
+        </div>
+
+        <div class="form-field form-field--textarea">
+            <label for="collectionGuidance">Collection Guidance</label>
+            <stargate-resizing-textarea minRows="3" textAreaId="collectionGuidance" [formGroup]="rfiForm"
+                                        textAreaControlName="collectionGuidance"></stargate-resizing-textarea>
+
+        </div>
+
+        <div class="eeis">
+            <div formArrayName="eeis" class="form-field eei" *ngFor="let eei of rfiForm.get('eeis').controls; let i = index;">
+                <div [ngClass]="{'eei_with-action': i > 0, 'eei_no-action': i === 0}">
+                    <label for="eei{{i + 1}}">EEI {{i + 1}}</label>
+                    <stargate-resizing-textarea textAreaId="eei{{i + 1}}" [formGroup]="rfiForm.get('eeis')"
+                                                maxLength="100"
+                                                textAreaControlName="{{i}}"
+                                                textAreaPlaceholder="{{rfiForm.enabled?'Description':''}}">
+                    </stargate-resizing-textarea>
+                </div>
+                <div *ngIf="i > 0" class="eei-menu" (click)="toggleMenu(i)" [id]="'eei-menu-' + i">
+                    <div *ngIf="displayedMenuIndex === i" class="menu" (clickOutside)="closeMenu()"
+                         [delayClickOutsideInit]=true>
+                        <div (click)="deleteEei(i)" [id]="'eei-delete-' + i" class="delete">Delete</div>
+                    </div>
+                </div>
+            </div>
+            <add-button *ngIf="rfiForm.enabled" class="eei-add-button" buttonText="Add an EEI" (click)="addEEI()"></add-button>
+        </div>
+    </div>
+</form>

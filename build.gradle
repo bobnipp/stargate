@@ -1,0 +1,46 @@
+plugins {
+    id 'org.sonarqube' version '2.6.2'
+}
+
+task tests(type: GradleBuild) {
+    tasks = ['components:api:test', 'components:ui:test', 'acceptance:localTest', 'components:prism-adapter:test']
+}
+
+task ciTests(type: GradleBuild) {
+    tasks = ['components:api:test', 'components:ui:test', 'acceptance:ciTest', 'components:prism-adapter:test']
+}
+
+task buildWithoutAcceptanceTests(type: GradleBuild) {
+    tasks = ['clean', 'components:api:test', 'components:ui:test', 'components:prism-adapter:test', 'assemble']
+}
+
+task assemble(type: GradleBuild) {
+    tasks = ['components:ui:build', 'components:api:assemble']
+}
+
+task runPrismAdapter(type: GradleBuild) {
+    tasks = ['components:prism-adapter:bootRun']
+}
+
+task bootApi(type: GradleBuild) {
+    tasks = ['components:ui:build', 'components:api:bootrun']
+}
+
+ext {
+    springBootVersion = '2.0.3.RELEASE'
+    swaggerVersion = '2.9.2'
+    spockVersion = '1.1-groovy-2.4'
+}
+
+defaultTasks 'clean', 'tests', 'assemble'
+
+String[] getArgs(List<String> args) {
+    String osName = System.getProperty('os.name').toLowerCase()
+    if (osName.contains('windows')) {
+        args.add(0, '/c')
+        args.add(0, 'cmd')
+        return args
+    } else {
+        return args
+    }
+}

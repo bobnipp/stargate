@@ -1,0 +1,4 @@
+spring:
+    datasource:
+        url: jdbc:mysql://localhost/stargate_test?serverTimezone=UTC&verifyServerCertificate=false&useSSL=true
+        username: root

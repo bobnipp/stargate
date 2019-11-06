@@ -1,0 +1,23 @@
+<div class="map-sidebar" data-aid="sidebar-map-list" *ngIf="showSidebar" [@slideInOut]>
+    <div class="header">
+        <img src="assets/img/imm-logo.svg"/>
+        <i class="material-icons close-sidebar" (click)="showSidebar = false">arrow_forward</i>
+    </div>
+    <div class="results">{{combinedList.length}} RESULTS</div>
+    <div class="sidebar-map-content">
+        <map-record-item-view *ngFor="let record of combinedList" [record]="record"
+                              [activeRecordIds]="activeRecordIds"
+                              (revealLocation)="fireRevealLocation($event)"></map-record-item-view>
+    </div>
+    <div class="map-sidebar_checkbox">
+        <div (click)="doConstrainResults()">
+            <input hidden type="checkbox" id="constrain-results" [checked]="checked"/>
+            <span data-aid="constraints_checkbox"></span>
+        </div>
+        <label class="map-sidebar_checkbox_label" for="constrain-results">Constrain results to map window</label>
+    </div>
+</div>
+
+<div class="open-sidebar tooltip" *ngIf="!showSidebar" (click)="showSidebar = true" data-tooltip="IMM">
+    <img class="logo" src="assets/img/logo.svg"/>
+</div>

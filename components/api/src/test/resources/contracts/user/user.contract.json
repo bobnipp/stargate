@@ -1,0 +1,12 @@
+{
+  "type": "object",
+  "properties": {
+    "id": {"type": "number"},
+    "username": {"type": "string"},
+    "firstName": {"type": "string"},
+    "lastName": {"type": "string"},
+    "email": {"type": "string"},
+    "notes": {"type": ["string", "null"]}
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,21 @@
+{
+  "request": {
+    "type": "object",
+    "properties": {
+      "data": {
+        "type": "string"
+      },
+      "msg": {
+        "type": "string"
+      },
+      "success": {
+        "type": "boolean"
+      }
+    },
+    "required": [
+      "data",
+      "msg",
+      "success"
+    ]
+  }
+}

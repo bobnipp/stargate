@@ -1,0 +1,26 @@
+{
+  "type": "object",
+  "properties": {
+    "errors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "leaf": {"type": "boolean"},
+          "expanded": {"type": "boolean"},
+          "iconCls": {"type": "string"},
+          "disableExpandIcon": {"type": "boolean"},
+          "code": {"type": "number"},
+          "text": {"type": "string"},
+          "id": {"type": "string"}
+        }
+      },
+      "required": [
+        "leaf", "expanded", "iconCls", "disableExpandedIcon", "code", "text", "id"
+      ],
+      "additionalProperties": false
+    },
+    "success": {"type": "boolean"}
+  },
+  "required": ["errors", "success"]
+}

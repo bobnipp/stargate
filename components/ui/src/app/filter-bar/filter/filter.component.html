@@ -1,0 +1,29 @@
+<div class="filter-container">
+    <button [class]="buttonClass"
+            (click)="toggleFilterView()"
+            attr.data-aid="{{defaultButtonText.replace(' ', '-').toLowerCase()}}-filter-button">
+        {{ buttonText }}
+    </button>
+
+    <div *ngIf="showFilterView" data-aid="filter-component" class="filter-popup"
+         (clickOutside)="resetFiltersAndClose()" [exclude]="'.filter-clear'" [delayClickOutsideInit]=true>
+
+        <div class="filter-content">
+            <div class="select-option-group" *ngFor="let systemOptions of availableOptions">
+                <span *ngIf="availableOptions.length > 1" class="display-name" [ngClass]="{'display-name_disabled': systemOptions.options[0]?.isDisabled}">{{systemOptions.displayName}}</span>
+                <div class="filter-checkbox" *ngFor="let option of systemOptions.options">
+                    <div (click)="toggleFilter(option)">
+                        <input hidden type="checkbox" [id]="'option-' + option.id" [value]="option.id"
+                               [checked]="option.isSelected" [disabled]="option.isDisabled"/>
+                        <span class="filter-checkbox_checkbox" [ngClass]="{'filter-checkbox_checkbox-disabled': option.isDisabled}" data-aid="filter__checkbox"></span>
+                    </div>
+                    <label class="filter-label" [ngClass]="{'filter-label_disabled': option.isDisabled}" [for]="'option-' + option.id">{{getOptionFormat(option.value)}}</label>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <div class="filter-clear" [hidden]="selectedOptions.length < 1" (click)="clearFiltersAndApply()">Clear</div>
+            <div class="filter-apply" (click)="doFilter()">Apply</div>
+        </div>
+    </div>
+</div>

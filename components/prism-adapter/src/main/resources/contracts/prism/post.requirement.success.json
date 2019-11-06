@@ -1,0 +1,17 @@
+{
+  "type": "object",
+  "properties": {
+    "data": {
+      "type": "object",
+      "properties": {
+        "total": {"type": "number"},
+        "autoSelectNode": {"type": "boolean"}
+      },
+      "required": ["total", "autoSelectNode"]
+    },
+    "success": {
+      "type": "boolean"
+    }
+  },
+  "required": ["data", "success"]
+}

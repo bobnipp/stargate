@@ -1,0 +1,50 @@
+<div class="{{showLinks? 'form-group_label-open' : 'form-group_label-closed'}}" (click)="toggleLinksView()">
+    <div class="arrow"></div>
+    <div class="label">Links</div>
+</div>
+<form *ngIf="showLinks" class="form-group">
+    <div class="existing-links">
+        <div *ngFor="let link of links; let i = index">
+            <stargate-sidebar-existing-link [rfiId]="rfiId" [link]="link" [index]="i" (delete)="deleteLink($event)"
+                                            (openLink)="openLinkedObject($event)"></stargate-sidebar-existing-link>
+        </div>
+    </div>
+</form>
+
+<div *ngIf="showLinks">
+    <add-button *ngIf="!showInputFields" buttonText="Add a Link" (click)="showInputs()"></add-button>
+    <div *ngIf="showInputFields" class="form-group" id="link-info">
+        <form [formGroup]="linkForm" class="form-group_links">
+            <div class="form-field form-field--select">
+                <label for="record2System">Originating System</label>
+                <select #system id="record2System" formControlName="record2System">
+                    <option value="" selected disabled hidden>Select</option>
+                    <option value="IMM">IMM</option>
+                    <option value="PRISM">PRISM</option>
+                </select>
+            </div>
+            <div class="form-field">
+                <label for="id">ID</label>
+                <input #input id="id" (keyup)="predictLinks(input.value, system.value)" [ngClass]="{invalid: linkForm.invalid && linkForm.get('record2Id').dirty}"
+                       formControlName="record2Id"/>
+                <div *ngIf="linkForm.invalid && linkForm.get('record2Id').dirty" class="invalid-message invalid-message_title">
+                    Cannot find ID
+                </div>
+            </div>
+            <div class="form-action-add">
+                <button type="button" class="btn-add btn-primary" class="btn-primary" [disabled]="!linkForm.dirty || linkForm.invalid" (click)="onAdd()">
+                    Add
+                </button>
+            </div>
+            <div class="form-action-clean">
+                <span class="sidebar_action sidebar_action--close" (click)="showInputs()"></span>
+            </div>
+            <div class="predicted-links" *ngIf="showTypeAhead">
+                <div class="link" *ngFor="let link of predictedLinks" (click)="selectPredictedLink(link.id)"
+                     (clickOutside)="closeTypeAhead()" [delayClickOutsideInit]=true>{{link.id}}
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+

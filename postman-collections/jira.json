@@ -1,0 +1,309 @@
+{
+	"info": {
+		"_postman_id": "ef688712-1fc4-4e53-9b82-767e7149f5c9",
+		"name": "Jira",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "List Fields",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "stargate",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "pivotal.stargate",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://stargate-jira.cfapps.io/rest/api/2/field",
+					"protocol": "https",
+					"host": [
+						"stargate-jira",
+						"cfapps",
+						"io"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"field"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Project details",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "stargate",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "pivotal.stargate",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://stargate-jira.cfapps.io/rest/api/2/project/JEN",
+					"protocol": "https",
+					"host": [
+						"stargate-jira",
+						"cfapps",
+						"io"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"project",
+						"JEN"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Issue Types",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "stargate",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "pivotal.stargate",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://stargate-jira.cfapps.io/rest/api/2/issuetype",
+					"protocol": "https",
+					"host": [
+						"stargate-jira",
+						"cfapps",
+						"io"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"issuetype"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create Project",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "stargate",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "pivotal.stargate",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"key\": \"EX\",\n    \"name\": \"Example\",\n    \"projectTypeKey\": \"business\",\n    \"projectTemplateKey\": \"com.atlassian.jira-core-project-templates:jira-core-project-management\",\n    \"lead\": \"pivotal.stargate\"\n}"
+				},
+				"url": {
+					"raw": "https://stargate-jira.cfapps.io/rest/api/2/project",
+					"protocol": "https",
+					"host": [
+						"stargate-jira",
+						"cfapps",
+						"io"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Project",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "stargate",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "pivotal.stargate",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "https://stargate-jira.cfapps.io/rest/api/2/project/EX",
+					"protocol": "https",
+					"host": [
+						"stargate-jira",
+						"cfapps",
+						"io"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"project",
+						"EX"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Projects",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "stargate",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "pivotal.stargate",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"key\": \"EX\",\n    \"name\": \"Example\",\n    \"projectTypeKey\": \"business\",\n    \"projectTemplateKey\": \"com.atlassian.jira-core-project-templates:jira-core-project-management\",\n    \"lead\": \"pivotal.stargate\"\n}"
+				},
+				"url": {
+					"raw": "https://stargate-jira.cfapps.io/rest/api/2/project",
+					"protocol": "https",
+					"host": [
+						"stargate-jira",
+						"cfapps",
+						"io"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"project"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Field",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "Educate80authority!",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "pivotal.stargate",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "https://stargate-jira.cfapps.io/rest/api/2/field/customfield_10011",
+					"protocol": "https",
+					"host": [
+						"stargate-jira",
+						"cfapps",
+						"io"
+					],
+					"path": [
+						"rest",
+						"api",
+						"2",
+						"field",
+						"customfield_10011"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

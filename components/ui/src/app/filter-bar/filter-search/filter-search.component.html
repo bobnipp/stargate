@@ -1,0 +1,5 @@
+<div class="search">
+    <span id="search-button" (click)="search()" class="search-icon"><img src="../../../assets/img/search-icon.svg"></span>
+    <input id="search-input" name="searchInput" class="search-input" placeholder="Search By Keyword" [(ngModel)]="searchInput" (keypress)="searchOnEnter($event)"/>
+</div>
+

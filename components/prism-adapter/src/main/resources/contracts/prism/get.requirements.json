@@ -1,0 +1,30 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "PRISM_ID": {
+        "type": "string"
+      },
+      "PRISM_TITLE": {
+        "type": "string"
+      },
+      "PRISM_DESCRIPTION": {
+        "type": "string"
+      },
+      "PRISM_DATE": {
+        "type": "string"
+      },
+      "PRISM_LAT": {
+        "type": "number",
+        "minimum": -90,
+        "maximum": 90
+      },
+      "PRISM_LNG": {
+        "type": "number",
+        "minimum": -180,
+        "maximum": 180
+      }
+    }
+  }
+}

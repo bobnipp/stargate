@@ -1,0 +1,140 @@
+.load {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  margin-top: 4rem;
+}
+
+.load-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.loading {
+  width: 300px;
+  height: 4px;
+  border-radius: 5px;
+  text-align: center;
+  background-color: #DEE5EB;
+}
+
+.bar {
+  float: left;
+  width: 80px;
+  height: 4px;
+  border-radius: 2px;
+  background-color: #3681a8;
+}
+
+.loading-bar .bar {
+  animation: load 2s cubic-bezier(.43, .43, .43, .43) infinite;
+}
+
+@keyframes load {
+  0%, 100% {
+    transform: translate(0, 0);
+  }
+
+  50% {
+    transform: translate(220px, 0);
+  }
+}
+
+.text-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.load-text {
+  display: block;
+  font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 14px;
+  font-style: italic;
+  color: #1f2226;
+}
+
+.refresh {
+  border-radius: 2px;
+  cursor: pointer;
+  margin-right: .5rem;
+
+  &:hover {
+    background-color: #e0e0e0;
+    color: #1f2226;
+  }
+
+  &:active {
+    box-shadow: inset 0 2px 3px 0 #000000;
+    background-color: #1f2226;
+    color: white;
+  }
+
+  &.material-icons {
+    font-size: 1.25rem;
+  }
+}
+
+.sort {
+  display: flex;
+  position: relative;
+
+  &_title {
+    cursor: pointer;
+    margin: 0.1rem 0 0.1rem 0;
+    padding: 0.2rem 0 0.2rem 0;
+
+    i {
+      font-size: 1rem;
+      vertical-align: middle;
+    }
+  }
+
+  &_options-container {
+    position: absolute;
+    background-color: #ffffff;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+    z-index: 1;
+    width: 5rem;
+    padding: .5rem 0 .5rem 0;
+
+    .sort-option {
+      display: flex;
+      padding: .5rem 0 .5rem .5rem;
+
+      i {
+        font-size: .75rem;
+        margin-right: .25rem;
+      }
+
+      &_icon-hidden {
+        visibility: hidden;
+      }
+
+      &:hover {
+        background-color: #dee5eb;
+      }
+    }
+  }
+
+  &_direction {
+    cursor: pointer;
+    margin: 0 .25rem 0 .5rem;
+
+    i {
+      font-size: 1rem;
+      padding-top: .25rem;
+    }
+  }
+}
+
+.results {
+  padding: 0;
+
+  &_count {
+    padding: 0.3rem 1rem 0.3rem 1rem;
+  }
+}

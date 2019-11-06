@@ -1,0 +1,40 @@
+.copy-button {
+  position: relative;
+}
+
+.icon {
+  display: inline-block;
+  font-size: 0;
+  width: 1rem;
+  height: 1rem;
+  margin: 0 auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  &:hover path {
+    fill: #001f3b;
+  }
+
+  &--copy {
+    margin: 0 .25rem 0 0;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  opacity: 0;
+}
+
+.active {
+  opacity: 1;
+  height: 1.5rem;
+  background-color: #001f3b;
+  font-size: .75rem;
+  font-weight: 400;
+  pointer-events: none;
+  width: 5rem;
+  text-align: center;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16), 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  color: #ffffff;
+  padding: 5px 10px;
+}

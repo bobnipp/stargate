@@ -1,0 +1,17 @@
+{
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "id": {"type": "string"},
+      "title": {"type": "string"},
+      "description": {"type": "string"},
+      "date": {"type": "string"},
+      "status": {"type": "string"},
+      "lat": {"type": "number"},
+      "lng": {"type": "number"}
+    },
+    "additionalProperties": false,
+    "required": ["id", "title", "description", "date", "status", "lat", "lng"]
+  }
+}

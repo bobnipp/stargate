@@ -1,0 +1,26 @@
+<div class="list-table custom-list" [attr.data-aid]="list.name" [ngClass]="{'record-drop': showRecordDrops}">
+    <div class="list-table_title">
+        <span [title]="list.name">{{ getTrimmedString(list.name, 30) }}</span>
+        <div class="list-table_actions">
+            <div class="material-icons close-column more-menu"
+                 [ngClass]="{selectedMenu: menuSelected}" (click)="toggleMenu()">
+                more_vert
+            </div>
+            <div class="menu" *ngIf="showMenu" (clickOutside)="closeMenu()" [delayClickOutsideInit]=true>
+                <div (click)="deleteList()" class="delete">
+                    Delete
+                </div>
+            </div>
+            <i class="material-icons close-column" (click)="closeList()">close</i>
+        </div>
+    </div>
+    <div class="results">{{listRecords.length}} RESULTS</div>
+
+    <div #dropDiv [id]="list.name" class="list-table_items" (drop)="drop($event)">
+        <div class="empty-list" *ngIf="listRecords.length === 0">
+            No Records Added
+        </div>
+        <list-record-item-view *ngFor="let record of listRecords" [record]="record" [list]="list" (removeRecord)="removeRecord($event)"></list-record-item-view>
+    </div>
+
+</div>

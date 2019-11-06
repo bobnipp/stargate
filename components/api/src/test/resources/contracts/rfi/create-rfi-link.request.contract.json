@@ -1,0 +1,19 @@
+{
+  "type": "object",
+  "properties": {
+    "record1Id": {
+      "type": "string"
+    },
+    "record1System": {
+      "type": "string"
+    },
+    "record2Id": {
+      "type": "string"
+    },
+    "record2System": {
+      "type": "string"
+    }
+  },
+  "required": ["record1Id", "record1System", "record2Id", "record2System"],
+  "additionalProperties": false
+}

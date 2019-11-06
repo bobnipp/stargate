@@ -1,0 +1,15 @@
+<div class="list-table links-list">
+    <div class="links-list-header">
+        <span class="icon-revealLinks blue-icon"></span>
+        <span class="title">{{ getTrimmedString(anchorRecord.title, 30) }}</span>
+        <i class="list_action material-icons" (click)="closeLinkList()">close</i>
+    </div>
+    <div class="list-table_items list-table_link-items">
+        <list-record-item-view [isLinkActive]="true"
+                               [record]="anchorRecord"></list-record-item-view>
+        <div *ngIf="linkRecords.length > 0" class="results">
+            {{linkRecords.length}} RESULT(S)
+        </div>
+        <list-record-item-view *ngFor="let record of linkRecords" [record]="record"></list-record-item-view>
+    </div>
+</div>

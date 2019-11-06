@@ -1,0 +1,452 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: A CloudFormation stack to pave the infrastructure and deploy the Stargate
+  app alongside all of its dependencies.
+Parameters:
+  amiId:
+    Description: The ami id for the EC2 instances
+    Type: String
+  stargateDbUser:
+    NoEcho: 'true'
+    Description: The stargate database admin account username
+    Type: String
+    MinLength: '1'
+    MaxLength: '16'
+    AllowedPattern: "[a-zA-Z][a-zA-Z0-9]*"
+    ConstraintDescription: must begin with a letter and contain only alphanumeric
+      characters.
+  stargateDbPassword:
+    NoEcho: 'true'
+    Description: The stargate database admin account password
+    Type: String
+    MinLength: '8'
+    MaxLength: '41'
+    AllowedPattern: "[a-zA-Z0-9]*"
+    ConstraintDescription: must contain only alphanumeric characters and be between
+      8 and 41 characters in length.
+  uaaDbUser:
+    NoEcho: 'true'
+    Description: The uaa database admin account username
+    Type: String
+    MinLength: '1'
+    MaxLength: '16'
+    AllowedPattern: "[a-zA-Z][a-zA-Z0-9]*"
+    ConstraintDescription: must begin with a letter and contain only alphanumeric
+      characters.
+  uaaDbPassword:
+    NoEcho: 'true'
+    Description: The uaa database admin account password
+    Type: String
+    MinLength: '8'
+    MaxLength: '41'
+    AllowedPattern: "[a-zA-Z0-9]*"
+    ConstraintDescription: must contain only alphanumeric characters and be between
+      8 and 41 characters in length.
+  dockerHost:
+    NoEcho: 'true'
+    Description: The hostname of the docker repository to use
+    Type: String
+  dockerUsername:
+    NoEcho: 'true'
+    Description: The username for the docker repository from which to retrieve images
+    Type: String
+  dockerPassword:
+    NoEcho: 'true'
+    Description: The password for the docker repository to use
+    Type: String
+  stargateApiVersion:
+    Description: The tag to use for the stargate api image pulled from Docker
+    Type: String
+  stargatePrismAdapterVersion:
+    Description: The tag to use for the stargate prism adapter image pulled from Docker
+    Type: String
+  stargateUaaVersion:
+    Description: The tag to use for the stargate uaa image pulled from Docker
+    Type: String
+Resources:
+  stargateDb:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: stargate-db-cloudformation
+      DBName: stargate_db_cloudformation
+      AllocatedStorage: '100'
+      DBInstanceClass: db.t2.micro
+      Engine: MySQL
+      EngineVersion: 5.7.22
+      Iops: '1000'
+      MasterUsername:
+        Ref: stargateDbUser
+      MasterUserPassword:
+        Ref: stargateDbPassword
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: 3f6c8036-d559-4767-bb16-9cafa3107b9c
+  uaaDb:
+    Type: AWS::RDS::DBInstance
+    Properties:
+      DBInstanceIdentifier: uaa-db-cloudformation
+      DBName: uaa_db_cloudformation
+      AllocatedStorage: '100'
+      DBInstanceClass: db.t2.micro
+      Engine: MySQL
+      EngineVersion: 5.7.22
+      Iops: '1000'
+      MasterUsername:
+        Ref: uaaDbUser
+      MasterUserPassword:
+        Ref: uaaDbPassword
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: 9c065f6e-16ae-46af-9590-8aec01b15aa2
+  redisCache:
+    Type: AWS::ElastiCache::CacheCluster
+    Properties:
+      VpcSecurityGroupIds:
+        - Fn::GetAtt:
+            - elasticacheSecurityGroup
+            - GroupId
+      CacheNodeType: cache.t2.micro
+      CacheParameterGroupName: default.redis5.0
+      Engine: redis
+      EngineVersion: 5.0.0
+      NumCacheNodes: 1
+      ClusterName: prism-cache-cf
+      SnapshotArns:
+        - arn:aws:s3:::stargate-backups-cloudformation/dump.rdb
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: 228e1b33-7fa2-40d4-8a25-572938c8f6f5
+  elasticacheSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Elasticache Security Group for Cloudformation
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: '6379'
+          ToPort: '6379'
+          CidrIp: 0.0.0.0/0
+  stargateSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Security group for stargate deployed by CloudFormation
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 22
+          ToPort: 22
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 8080
+          ToPort: 8080
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 8081
+          ToPort: 8081
+          CidrIp: 0.0.0.0/0
+        - IpProtocol: tcp
+          FromPort: 8082
+          ToPort: 8082
+          CidrIp: 0.0.0.0/0
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: ea8af483-bfd6-4972-876c-ce041d855714
+  stargateApp:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: stargateKeyCloudFormation
+      SecurityGroups:
+        - Ref: stargateSecurityGroup
+      InstanceType: t2.medium
+      ImageId: !Ref amiId
+      Tags:
+        - Key: Name
+          Value: stargate-app-cloudformation
+      UserData: !Base64
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource stargateApp '
+            - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: d15068b6-6fa6-4e27-964e-1a19c66140ed
+      AWS::CloudFormation::Init:
+        configSets:
+          InstallAndRun:
+            - Install
+            - Configure
+        Install:
+          commands:
+            docker:
+              command: sudo amazon-linux-extras install docker && sudo service docker
+                start
+        Configure:
+          commands:
+            docker-login:
+              command:
+                Fn::Join:
+                  - ''
+                  - - docker login https://
+                    - Ref: dockerHost
+                    - " --username "
+                    - Ref: dockerUsername
+                    - " --password "
+                    - Ref: dockerPassword
+            docker-pull-api:
+              command:
+                Fn::Join:
+                  - ''
+                  - - 'docker pull '
+                    - Ref: dockerHost
+                    - "/stargate-api:"
+                    - Ref: stargateApiVersion
+            docker-run-api:
+              command:
+                Fn::Join:
+                  - ''
+                  - - 'docker run --env UAA_HOST='
+                    - Fn::GetAtt:
+                      - uaa
+                      - PublicDnsName
+                    - ' --env STARGATE_JDBC_URL="jdbc:mysql://'
+                    - Fn::GetAtt:
+                      - stargateDb
+                      - Endpoint.Address
+                    - ":"
+                    - Fn::GetAtt:
+                      - stargateDb
+                      - Endpoint.Port
+                    - '/stargate_db_cloudformation?serverTimezone=UTC&verifyServerCertificate=false&useSSL=true" --env STARGATE_DB_USERNAME='
+                    - Ref: stargateDbUser
+                    - ' --env STARGATE_DB_PASSWORD='
+                    - Ref: stargateDbPassword
+                    - ' --env PRISM_ADAPTER_HOST='
+                    - Fn::GetAtt:
+                      - prismAdapter
+                      - PublicDnsName
+                    - ' -p 8081:8081 '
+                    - Ref: dockerHost
+                    - '/stargate-api:'
+                    - Ref: stargateApiVersion
+    DependsOn:
+      - uaa
+      - stargateDb
+  prismAdapter:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: stargateKeyCloudFormation
+      SecurityGroups:
+        - Ref: stargateSecurityGroup
+      InstanceType: t2.medium
+      ImageId: !Ref amiId
+      Tags:
+        - Key: Name
+          Value: stargate-prism-adapter-app-cloudformation
+      UserData: !Base64
+        Fn::Join:
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource prismAdapter '
+            - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: d15068b6-6fa6-4e27-964e-1a19c66140ed
+      AWS::CloudFormation::Init:
+        configSets:
+          InstallAndRun:
+            - Install
+            - Configure
+        Install:
+          commands:
+            docker:
+              command: sudo amazon-linux-extras install docker && sudo service docker
+                start
+        Configure:
+          commands:
+            docker-login:
+              command:
+                Fn::Join:
+                  - ''
+                  - - 'docker login https://'
+                    - Ref: dockerHost
+                    - " --username "
+                    - Ref: dockerUsername
+                    - " --password "
+                    - Ref: dockerPassword
+            docker-pull-adapter:
+              command:
+                Fn::Join:
+                  - ''
+                  - - 'docker pull '
+                    - Ref: dockerHost
+                    - "/stargate-prism-adapter:"
+                    - Ref: stargatePrismAdapterVersion
+            docker-run-adapter:
+              command:
+                Fn::Join:
+                  - ''
+                  - - 'docker run --env PRISM_CACHE_HOST='
+                    - Fn::GetAtt:
+                      - redisCache
+                      - RedisEndpoint.Address
+                    - ' --env PRISM_CACHE_PORT='
+                    - Fn::GetAtt:
+                      - redisCache
+                      - RedisEndpoint.Port
+                    - ' -p 8082:8082 '
+                    - Ref: dockerHost
+                    - '/stargate-prism-adapter:'
+                    - Ref: stargatePrismAdapterVersion
+    DependsOn:
+      - redisCache
+  uaa:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: stargateKeyCloudFormation
+      SecurityGroups:
+        - Ref: stargateSecurityGroup
+      InstanceType: t2.medium
+      ImageId: !Ref amiId
+      Tags:
+        - Key: Name
+          Value: stargate-uaa-cloudformation
+      UserData: !Base64
+        'Fn::Join':
+          - ''
+          - - |
+              #!/bin/bash -xe
+            - |
+              # Install the files and packages from the metadata
+            - '/opt/aws/bin/cfn-init -v '
+            - '         --stack '
+            - !Ref 'AWS::StackName'
+            - '         --resource uaa '
+            - '         --configsets InstallAndRun '
+            - '         --region '
+            - !Ref 'AWS::Region'
+            - |+
+    Metadata:
+      AWS::CloudFormation::Designer:
+        id: d15068b6-6fa6-4e27-964e-1a19c66140ed
+      AWS::CloudFormation::Init:
+        configSets:
+          InstallAndRun:
+            - Install
+            - Configure
+        Install:
+          commands:
+            docker:
+              command: sudo amazon-linux-extras install docker && sudo service docker
+                start
+        Configure:
+          commands:
+            docker-login:
+              command:
+                Fn::Join:
+                  - ''
+                  - - 'docker login https://'
+                    - Ref: dockerHost
+                    - " --username "
+                    - Ref: dockerUsername
+                    - " --password "
+                    - Ref: dockerPassword
+            docker-pull-uaa:
+              command:
+                Fn::Join:
+                  - ''
+                  - - 'docker pull '
+                    - Ref: dockerHost
+                    - "/stargate-aws-uaa:"
+                    - Ref: stargateUaaVersion
+            docker-run-uaa:
+              command:
+                Fn::Join:
+                  - ''
+                  - - 'docker run --env UAA_JDBC_URL="jdbc:mysql://'
+                    - Fn::GetAtt:
+                      - uaaDb
+                      - Endpoint.Address
+                    - ":"
+                    - Fn::GetAtt:
+                      - uaaDb
+                      - Endpoint.Port
+                    - '/uaa_db_cloudformation" --env UAA_DB_USERNAME='
+                    - Ref: uaaDbUser
+                    - ' --env UAA_DB_PASSWORD='
+                    - Ref: uaaDbPassword
+                    - ' -p 8080:8080 '
+                    - Ref: dockerHost
+                    - '/stargate-aws-uaa:'
+                    - Ref: stargateUaaVersion
+    DependsOn:
+      - uaaDb
+Metadata:
+  AWS::CloudFormation::Designer:
+    3f6c8036-d559-4767-bb16-9cafa3107b9c:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 90
+        y: 40
+      z: 1
+      embeds: []
+    9c065f6e-16ae-46af-9590-8aec01b15aa2:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 90
+        y: 250
+      z: 1
+      embeds: []
+    228e1b33-7fa2-40d4-8a25-572938c8f6f5:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 90
+        y: 150
+      z: 1
+      embeds: []
+    ea8af483-bfd6-4972-876c-ce041d855714:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 550
+        y: 250
+      z: 1
+      embeds: []
+    d15068b6-6fa6-4e27-964e-1a19c66140ed:
+      size:
+        width: 60
+        height: 60
+      position:
+        x: 440
+        y: 250
+      z: 0
+      embeds: []
+      isassociatedwith:
+        - ea8af483-bfd6-4972-876c-ce041d855714
+      dependson:
+        - 228e1b33-7fa2-40d4-8a25-572938c8f6f5
+        - 9c065f6e-16ae-46af-9590-8aec01b15aa2
+        - 3f6c8036-d559-4767-bb16-9cafa3107b9c

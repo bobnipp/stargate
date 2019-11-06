@@ -1,0 +1,15 @@
+uaa-base-url: http://stargate-uaa.apps.vi2e.io
+
+spring:
+  datasource:
+    hikari:
+      maximum-pool-size: 1
+
+sendgrid:
+  apiKey: ${SENDGRID_API_KEY:}
+
+prism-adapter:
+  host-name: https://prism-adapter.apps.vi2e.io
+
+s3:
+  endpointUrl:
