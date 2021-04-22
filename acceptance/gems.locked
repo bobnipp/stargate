@@ -64,7 +64,7 @@ GEM
     mysql2 (0.5.1)
     nokogiri (1.10.1)
       mini_portile2 (~> 2.4.0)
-    oauth (0.5.4)
+    oauth (0.5.6)
     public_suffix (3.0.3)
     rack (2.0.6)
     rack-test (1.1.0)
